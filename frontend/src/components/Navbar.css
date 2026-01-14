@@ -4,7 +4,10 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  padding: 1rem 0;
+
+  /* ↓ Reduced height */
+  padding: 0.6rem 0;
+
   border-bottom: 2px solid var(--border-color);
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
@@ -12,11 +15,14 @@
 .navbar-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+
+  /* ↓ Reduced horizontal padding */
+  padding: 0 1.5rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 /* --- Logo and Text --- */
@@ -26,37 +32,39 @@
   text-decoration: none;
   color: var(--primary-green);
   font-weight: bold;
-  transition: transform 0.3s ease;
-  
+
+  /* ↓ Micro-interaction */
+  transition: transform 0.25s ease;
 }
 
 .navbar-logo:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .logo-image {
-  height: 80px;
-  width: 80px;
-  margin-right: 10px;
-  border-radius: 50%; /* Optional for round look */
+  /* ↓ reduced size for shorter navbar */
+  height: 55px;
+  width: 77px;
+
+  margin-right: 8px;
+  border-radius: 50%;
   object-fit: cover;
 }
 
 .logo-text-container {
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 .logo-text {
-  font-size: 1.8rem;
+  font-size: 1.45rem; /* from 1.8rem */
   color: var(--primary-green);
 }
 
 .logo-subtitle {
-  font-size: 0.75rem;
+  font-size: 0.7rem; /* slightly smaller */
   color: var(--text-dark);
-  font-weight: normal;
   opacity: 0.8;
 }
 
@@ -64,7 +72,7 @@
 .navbar-menu {
   display: flex;
   list-style: none;
-  gap: 2rem;
+  gap: 1.5rem; /* slightly tighter */
   align-items: center;
   flex: 1;
   justify-content: center;
@@ -74,9 +82,10 @@
   text-decoration: none;
   color: var(--text-dark);
   font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+
+  padding: 0.4rem 0.8rem; /* reduced */
+  border-radius: 7px;
+  transition: all 0.25s ease;
 }
 
 .navbar-link:hover {
@@ -92,25 +101,41 @@
 /* --- Controls --- */
 .navbar-controls {
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
   align-items: center;
   position: relative;
 }
+
+/* ------------------------ */
+/* UPDATED: username visible beside profile icon */
+.profile-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-left: 4px;
+  white-space: nowrap;
+}
+/* ------------------------ */
 
 .theme-toggle,
 .profile-icon {
   background: var(--bg-secondary);
   border: 2px solid var(--border-color);
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+
+  /* ↓ smaller buttons */
+  width: 34px;
+  height: 34px;
+
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1.2rem;
+
+  font-size: 1rem;
   color: var(--text-dark);
-  transition: all 0.3s ease;
+
+  transition: all 0.25s ease;
 }
 
 .theme-toggle:hover,
@@ -118,7 +143,7 @@
   background: var(--primary-green);
   border-color: var(--primary-green);
   color: var(--text-light);
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 /* --- Profile Dropdown --- */
@@ -128,19 +153,23 @@
 
 .profile-dropdown {
   position: absolute;
-  top: calc(100% + 10px);
-  right: 0;
+  top: calc(100% + 8px);
+
   background: var(--card-bg);
   border: 2px solid var(--border-color);
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  min-width: 250px;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  min-width: 170px;
   z-index: 1001;
   overflow: hidden;
+
+  /* UPDATED: subtle animation */
+  animation: dropdownFade 0.18s ease-out;
 }
 
 .dropdown-header {
-  padding: 1rem;
+  padding: 0.8rem; /* slightly smaller */
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
 }
@@ -148,68 +177,58 @@
 .user-info {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
 
 .user-avatar {
-  width: 45px;
-  height: 45px;
+  width: 38px;
+  height: 38px;
+
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-green), var(--soothing-turquoise));
+  background: linear-gradient(
+    135deg,
+    var(--primary-green),
+    var(--soothing-turquoise)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-light);
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1rem;
   flex-shrink: 0;
-}
-
-.user-details {
-  flex: 1;
-  min-width: 0;
 }
 
 .user-name {
   font-weight: 600;
   color: var(--text-dark);
-  font-size: 0.95rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 0.9rem;
 }
 
 .user-email {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-dark);
   opacity: 0.7;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 0.25rem;
+  margin-top: 0.15rem;
 }
 
 .dropdown-divider {
   height: 1px;
   background: var(--border-color);
-  margin: 0.5rem 0;
+  margin: 0.4rem 0;
 }
 
 .dropdown-item {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.875rem 1rem;
+  gap: 0.6rem;
+
+  padding: 0.75rem 0.9rem;
+  font-size: 0.9rem;
+
   color: var(--text-dark);
-  text-decoration: none;
-  transition: all 0.2s ease;
   cursor: pointer;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-  font-family: inherit;
-  font-size: 0.95rem;
+  transition: all 0.2s ease;
 }
 
 .dropdown-item:hover {
@@ -217,64 +236,38 @@
   color: var(--primary-green);
 }
 
-.dropdown-item svg {
-  flex-shrink: 0;
-  stroke-width: 2;
-}
-
+/* ------------------------ */
+/* UPDATED: centered logout */
 .dropdown-item.logout {
   color: #e74c3c;
+  justify-content: center;
+  text-align: center;
+}
+/* ------------------------ */
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.dropdown-item.logout:hover {
-  background: rgba(231, 76, 60, 0.1);
-  color: #e74c3c;
-}
-
-/* --- Responsive --- */
+/* --- Responsive adjustments --- */
 @media (max-width: 768px) {
-  .navbar-container {
-    flex-wrap: wrap;
-    padding: 0 1rem;
-  }
-
-  .navbar-menu {
-    order: 3;
-    width: 100%;
-    justify-content: space-around;
-    gap: 0.5rem;
-  }
-
-  .navbar-link {
-    padding: 0.5rem;
-    font-size: 0.9rem;
+  .logo-image {
+    height: 38px;
+    width: 38px;
   }
 
   .logo-text {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
-  .logo-subtitle {
-    font-size: 0.65rem;
-  }
-
-  .logo-image {
-    height: 35px;
-    width: 35px;
-  }
-
-  .profile-dropdown {
-    right: 0;
-    min-width: 220px;
-  }
-
-  .user-name,
-  .user-email {
-    font-size: 0.85rem;
-  }
-
-  .dropdown-item {
-    padding: 0.75rem;
-    font-size: 0.9rem;
+  .navbar-menu {
+    gap: 5 rem;
   }
 }

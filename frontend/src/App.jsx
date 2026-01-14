@@ -1,27 +1,27 @@
-import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Homepage from './pages/Homepage'
-import ExplorePlants from './pages/ExplorePlants'
-import PlantDetail from './pages/PlantDetail'
-import HerbalChatbot from './pages/HerbalChatbot'
-import VirtualTour from './pages/VirtualTour'
-import Visualizer3D from './pages/Visualizer3D'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import ForgotPassword from './pages/ForgotPassword'
-import './App.css'
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Homepage from "./pages/Homepage";
+import ExplorePlants from "./pages/ExplorePlants";
+import PlantDetail from "./pages/PlantDetail";
+import HerbalChatbot from "./pages/HerbalChatbot";
+import VirtualTour from "./pages/VirtualTour";
+import Visualizer3D from "./pages/Visualizer3D";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
+import "./App.css";
 
 function App() {
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-  }, [theme])
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
-  }
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
 
   return (
     <Router>
@@ -40,7 +40,7 @@ function App() {
         </Routes>
       </div>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
