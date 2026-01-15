@@ -11,8 +11,23 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import "./App.css";
+import axios from "axios";
 
 function App() {
+  //setup for the backend communication
+  const fetchAPI = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api");
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching data from backend:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAPI();
+  }, []);
+
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
