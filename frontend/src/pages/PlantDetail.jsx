@@ -20,7 +20,7 @@ const PlantDetail = () => {
   const [showAyushModal, setShowAyushModal] = useState(false);
   const [showHealthModal, setShowHealthModal] = useState(false);
   const [isSpeechSupported, setIsSpeechSupported] = useState(
-    () => typeof window !== "undefined" && "speechSynthesis" in window
+    () => typeof window !== "undefined" && "speechSynthesis" in window,
   );
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [availableVoices, setAvailableVoices] = useState([]);
@@ -214,7 +214,8 @@ const PlantDetail = () => {
     aloe: aloeModel,
     neem: neemModel,
     turmeric: turmericModel,
-    garlic: null, // No model available for garlic
+    garlic:
+      "https://cbegqyagrayedokkolqe.supabase.co/storage/v1/object/public/models/ALOE.glb", // No model available for garlic
   };
 
   const plantModel = modelMap[slug] || null;
@@ -330,7 +331,7 @@ const PlantDetail = () => {
     }
 
     const utterance = new window.SpeechSynthesisUtterance(
-      plantNarration.slice(0, 900)
+      plantNarration.slice(0, 900),
     );
     utterance.lang = "en-US";
     utterance.rate = 0.95;
@@ -342,16 +343,16 @@ const PlantDetail = () => {
           (voice) =>
             voice.lang &&
             voice.lang.startsWith("en") &&
-            voice.name.toLowerCase().includes("natural")
+            voice.name.toLowerCase().includes("natural"),
         ) ||
         availableVoices.find(
           (voice) =>
             voice.lang &&
             voice.lang.startsWith("en") &&
-            voice.name.toLowerCase().includes("voice")
+            voice.name.toLowerCase().includes("voice"),
         ) ||
         availableVoices.find(
-          (voice) => voice.lang && voice.lang.startsWith("en")
+          (voice) => voice.lang && voice.lang.startsWith("en"),
         ) ||
         availableVoices[0];
       if (preferredVoice) {
