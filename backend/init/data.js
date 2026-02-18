@@ -114,7 +114,7 @@ const samplePlants = [
     activeCompounds: "Vasicine, Vasicinone",
     therapeuticProp: "Expectorant, Bronchodilator, Anti-inflammatory",
     dosageForm: "Juice, Syrup, Decoction",
-    glb3D: "supabase/plants/3d/adulsa.glb",
+    glb3D: "",
     ayushApp: {
       ayurveda: "Used for cough, asthma, and bronchitis.",
       unani: "Used for respiratory congestion.",
@@ -179,7 +179,7 @@ const samplePlants = [
     activeCompounds: "Arjunolic acid, Tannins, Flavonoids",
     therapeuticProp: "Cardioprotective, Antioxidant, Anti-inflammatory",
     dosageForm: "Powder, Decoction, Arjunarishta",
-    glb3D: "supabase/plants/3d/arjuna.glb",
+    glb3D: "",
     ayushApp: {
       ayurveda: "Used for heart health and blood pressure.",
       unani: "Used as cardiac tonic.",
@@ -244,7 +244,7 @@ const samplePlants = [
     activeCompounds: "Tannins, Gallic acid, Ellagic acid",
     therapeuticProp: "Antioxidant, Digestive, Respiratory tonic",
     dosageForm: "Powder, Decoction, Triphala formulation",
-    glb3D: "supabase/plants/3d/baheda.glb",
+    glb3D: "",
     ayushApp: {
       ayurveda: "Used for cough and digestion.",
       unani: "Used for respiratory problems.",
@@ -441,7 +441,7 @@ const samplePlants = [
     activeCompounds: "Tinosporine, Berberine",
     therapeuticProp: "Immunomodulatory, Antipyretic, Anti-inflammatory",
     dosageForm: "Juice, Decoction, Tablets",
-    glb3D: "supabase/plants/3d/giloy.glb",
+    glb3D: "",
     ayushApp: {
       ayurveda: "Used for fever, immunity, and digestion.",
       unani: "Used to treat chronic fever.",
@@ -474,7 +474,7 @@ const samplePlants = [
     activeCompounds: "Gymnemic acids, Saponins",
     therapeuticProp: "Antidiabetic, Anti-inflammatory, Metabolic regulator",
     dosageForm: "Powder, Capsules, Tea",
-    glb3D: "supabase/plants/3d/gudmar.glb",
+    glb3D: "",
     ayushApp: {
       ayurveda: "Used for diabetes management.",
       unani: "Used for sugar control.",
@@ -605,7 +605,7 @@ const samplePlants = [
     activeCompounds: "Glycyrrhizin, Liquiritin, Flavonoids",
     therapeuticProp: "Expectorant, Anti-ulcer, Anti-inflammatory",
     dosageForm: "Powder, Decoction, Syrup",
-    glb3D: "supabase/plants/3d/mulethi.glb",
+    glb3D: "",
     ayushApp: {
       ayurveda: "Used for cough, sore throat, and gastric ulcers.",
       unani: "Used as soothing tonic.",
@@ -800,7 +800,7 @@ const samplePlants = [
     activeCompounds: "Alkaloids, Flavonoids, Coumarins",
     therapeuticProp: "Memory enhancer, Anti-anxiety, Neuroprotective",
     dosageForm: "Syrup, Powder, Capsules",
-    glb3D: "supabase/plants/3d/shankhpushpi.glb",
+    glb3D: "",
     ayushApp: {
       ayurveda: "Used for memory and concentration.",
       unani: "Used as brain tonic.",

@@ -66,12 +66,15 @@ function Plant3DViewer({ modelUrl }) {
           alignItems: "center",
           justifyContent: "center",
           height: "100%",
+          width: "100%",
           color: "#ffffff",
-          fontSize: "0.9rem",
+          fontWeight: "normal",
+          background: "rgb(0, 0, 0)",
+          fontSize: "1.2rem",
           fontFamily: "system-ui",
         }}
       >
-        3D model not available for this plant
+        3D model unavailable !!
       </div>
     );
   }
@@ -82,7 +85,7 @@ function Plant3DViewer({ modelUrl }) {
 
   return (
     <Canvas
-      camera={{ position: [0, 0, 5], fov: 50 }}
+      camera={{ position: [0, 0, 2], fov: 50 }}
       style={{ width: "100%", height: "100%", background: "#000000" }}
       gl={{
         antialias: true,
@@ -102,10 +105,10 @@ function Plant3DViewer({ modelUrl }) {
           enableZoom={true}
           enablePan={false}
           enableRotate={true}
-          minDistance={1.5}
+          minDistance={1}
           maxDistance={15}
           autoRotate={true}
-          autoRotateSpeed={1.3}
+          autoRotateSpeed={1.5}
           dampingFactor={0.05}
           enableDamping={true}
           rotateSpeed={0.5}
