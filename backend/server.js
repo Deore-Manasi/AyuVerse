@@ -19,50 +19,37 @@ async function main() {
   console.log("Connected to MongoDB");
 }
 
+app.use(express.urlencoded({ extended: true }));
+
 //My Server Port
 const PORT = 8080;
 
-app.get("/api", (req, res) => {
+//root route
+app.get("/", (req, res) => {
   res.send("AyuVerse Backend Server is Running");
 });
 
-app.get("/api/listings", async (req, res) => {
-  let sampleListings = new Listing({
-    plantName: "Ashwagandha",
-    plantSize: "Medium",
-    nativeRegion: "India, Middle East, and parts of Africa",
-    preferredClimate: "Tropical and subtropical climates",
-    reqSunlight: "Full sun to partial shade",
-    reqSoil: "Well-drained, sandy or loamy soil",
-    partMedicine: "Roots",
-    activeCompounds: "Withanolides, alkaloids, and saponins",
-    therapeuticProp:
-      "Adaptogenic, anti-inflammatory, and antioxidant properties",
-    dosageForm: "Powder, capsules, and tinctures",
-    glb3D: "https://example.com/ashwagandha-3d-model.glb",
-    ayushApp: {
-      ayurveda:
-        "Ashwagandha is a key herb in Ayurveda, used for its rejuvenating and adaptogenic properties.",
-      unani:
-        "In Unani medicine, Ashwagandha is used to enhance vitality and treat various ailments.",
-      siddha:
-        "Siddha medicine utilizes Ashwagandha for its therapeutic benefits in managing stress and promoting overall health.",
-    },
-    benefits: {
-      a: "Reduces stress and anxiety",
-      b: "Improves sleep quality",
-      c: "Enhances cognitive function",
-      d: "Boosts immune system",
-    },
-    family: "Solanaceae",
-    genus: "Withania",
-    size: "Medium",
-    voiceDesc:
-      "Ashwagandha is a versatile herb known for its adaptogenic properties, helping the body manage stress and promote overall well-being.",
-  });
-  await sampleListings.save();
-  console.log("Sample listing saved to database");
-  res.send("Sample listing added to database");
+//Index all listings route
+app.get("/listings", async (req, res) => {
+  const allListings = await Listing.find({});
+  res.send(allListings);
+});
+
+//Show route for plants id:one
+app.get("/listings/:name", async (req, res) => {
+  try {
+    const plant = await Listing.findOne({
+      plantName: req.params.name,
+    });
+
+    if (!plant) {
+      return res.status(404).json({ message: "Plant not found" });
+    }
+
+    res.json(plant);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 app.listen(PORT, () => {

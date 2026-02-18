@@ -953,8 +953,7 @@ const samplePlants = [
   {
     plantName: "Vidhadaru",
     plantSize: "Large woody climber",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/3/3a/Argyreia_speciosa_flower.jpg",
+    image: "",
     nativeRegion: "India, Sri Lanka, tropical regions of Asia",
     preferredClimate: "Tropical and subtropical climate",
     reqSunlight: "Full sun to partial shade",

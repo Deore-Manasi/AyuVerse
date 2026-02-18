@@ -45,7 +45,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/explore-plants" element={<ExplorePlants />} />
-          <Route path="/plant/:slug" element={<PlantDetail />} />
+          <Route path="/plant/:name" element={<PlantDetail />} />
           <Route path="/herbal-chatbot" element={<HerbalChatbot />} />
           <Route path="/3d-visualizer" element={<Visualizer3D />} />
           <Route path="/virtual-tour" element={<VirtualTour />} />
