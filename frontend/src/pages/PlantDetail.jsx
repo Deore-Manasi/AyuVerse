@@ -1021,7 +1021,7 @@ const PlantDetail = () => {
   if (!plant) {
     return (
       <div className="plant-detail">
-        <h2>Loading...</h2>
+        <h6>Load...</h6>
       </div>
     );
   }
@@ -1098,7 +1098,7 @@ const PlantDetail = () => {
               className="plant-tab"
               onClick={() => setShowAyushModal(true)}
             >
-              AYUSH
+              Holistic Uses
             </button>
 
             <button
