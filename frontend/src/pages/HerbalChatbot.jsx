@@ -159,11 +159,19 @@ const HerbalChatbot = () => {
                     ))}
 
                   {loading && (
-                    <div className="typing-indicator">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </div>
+                    <motion.div
+                      className="message bot-message"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                    >
+                      <div className="message-content typing-bubble">
+                        <div className="typing-indicator">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                        </div>
+                      </div>
+                    </motion.div>
                   )}
                 </AnimatePresence>
 
