@@ -12,8 +12,19 @@ const HerbalChatbot = () => {
       timestamp: new Date(),
     },
   ]);
+
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const [collapsed, setCollapsed] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // UI ONLY — Chat History Sidebar (dummy titles for now)
+  const [chatHistory] = useState([
+    { id: 1, title: "Ayurveda Benefits" },
+    { id: 2, title: "Tulsi Uses" },
+    { id: 3, title: "Dosha Types" },
+  ]);
 
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -40,13 +51,13 @@ const HerbalChatbot = () => {
     setInputValue("");
     setLoading(true);
 
-    // Backend API call (optional, keeps original fetch logic)
     try {
       const res = await fetch("http://127.0.0.1:8000/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: userMessage.text }),
       });
+
       const data = await res.json();
 
       const botMessage = {
@@ -58,7 +69,6 @@ const HerbalChatbot = () => {
 
       setMessages((prev) => [...prev, botMessage]);
     } catch (err) {
-      console.error("Error:", err);
       setMessages((prev) => [
         ...prev,
         {
@@ -81,138 +91,108 @@ const HerbalChatbot = () => {
   };
 
   return (
-    <div className="herbal-chatbot">
-      <motion.div
-        className="chatbot-container"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="chatbot-header">
-          <div className="header-content">
-            <div className="header-image">
-              <motion.img
-                src={chatbotImg}
-                alt="Ayurvedic Chatbot"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-              />
+    <div className="chat-page">
+      {/* SIDEBAR */}
+      <div className="chat-sidebar">
+        <div className="sidebar-header">
+          <h2 style={{ textAlign: "center" }}>Your Chats</h2>
+          <hr></hr>
+          <button className="new-chat-btn">+ New Chat</button>
+          <input placeholder="Search chats..." className="chat-search" />
+        </div>
+
+        <div className="chat-history">
+          {chatHistory.map((chat) => (
+            <div key={chat.id} className="chat-history-item">
+              {chat.title}
             </div>
-            <div className="header-text">
-              <h1>Herbal Chatbot</h1>
-              <p>Your AI Ayurvedic Assistant</p>
-              <div className="status-indicator">
-                <span className="status-dot"></span>
-                <span>Online</span>
+          ))}
+        </div>
+      </div>
+
+      {/* MAIN CHAT AREA */}
+      <div className="herbal-chatbot">
+        <motion.div
+          className={`chatbot-container ${collapsed ? "collapsed" : ""}`}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* HEADER */}
+          <div className="chatbot-header">
+            <div className="header-left">
+              <img src={chatbotImg} alt="bot" />
+              <div>
+                <h1>Herbal Chatbot</h1>
+                <span className="online-status">● Online</span>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="chatbot-content">
-          <div className="chat-interface">
-            <div className="chat-messages" id="chat-messages">
-              <AnimatePresence>
-                {messages.map((message) => (
-                  <motion.div
-                    key={message.id}
-                    className={`message ${message.sender}-message`}
-                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="message-avatar">
-                      {message.sender === "bot" ? (
-                        <div className="bot-avatar">
-                          <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          >
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                          </svg>
+          <>
+            {/* CHAT BODY */}
+            <div className="chatbot-content">
+              <div className="chat-messages">
+                <AnimatePresence>
+                  {messages
+                    .filter((msg) =>
+                      msg.text.toLowerCase().includes(searchTerm.toLowerCase()),
+                    )
+                    .map((message) => (
+                      <motion.div
+                        key={message.id}
+                        className={`message ${message.sender}-message`}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="message-content">
+                          <p>{message.text}</p>
+                          <span className="message-time">
+                            {message.timestamp?.toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                          </span>
                         </div>
-                      ) : (
-                        <div className="user-avatar">
-                          <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          >
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                            <circle cx="12" cy="7" r="4" />
-                          </svg>
-                        </div>
-                      )}
+                      </motion.div>
+                    ))}
+
+                  {loading && (
+                    <div className="typing-indicator">
+                      <span></span>
+                      <span></span>
+                      <span></span>
                     </div>
-                    <div className="message-content">
-                      <p>{message.text}</p>
-                      {message.timestamp && (
-                        <span className="message-time">
-                          {message.timestamp.toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </span>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
-                {loading && (
-                  <motion.div
-                    className="message bot-message"
-                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                  >
-                    <div className="message-content">
-                      <p>Typing...</p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-              <div ref={messagesEndRef} />
+                  )}
+                </AnimatePresence>
+
+                <div ref={messagesEndRef} />
+              </div>
             </div>
 
+            {/* INPUT AREA */}
             <div className="chat-input-container">
               <input
-                ref={inputRef}
                 type="text"
-                placeholder="Ask about Ayurvedic plants, remedies, or health tips..."
+                placeholder="Ask about Ayurvedic plants..."
                 className="chat-input"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyPress}
               />
+
               <button
                 className="send-button"
                 onClick={handleSendMessage}
                 disabled={!inputValue.trim() || loading}
               >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <line x1="22" y1="2" x2="11" y2="13"></line>
-                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
+                ➤
               </button>
             </div>
-          </div>
-        </div>
-      </motion.div>
+          </>
+        </motion.div>
+      </div>
     </div>
   );
 };
