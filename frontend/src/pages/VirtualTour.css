@@ -23,15 +23,14 @@
 
 .tour-content {
   max-width: 1200px;
-  margin: 0 auto;
+
   padding: 4rem 2rem;
 }
 
 .tour-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .tour-section-card {
@@ -39,6 +38,11 @@
   border-radius: 20px;
   padding: 2.5rem 2rem;
   text-align: center;
+  width: 440px;
+  gap: 0.5rem;
+  margin-top: 3rem;
+  margin-left: 1.5rem;
+  height: 250px;
   border: 2px solid var(--border-color);
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -51,7 +55,6 @@
 
 .tour-icon {
   font-size: 4rem;
-  margin-bottom: 1.5rem;
 }
 
 .tour-section-card h3 {
@@ -63,18 +66,23 @@
 
 .tour-section-card p {
   color: var(--text-dark);
-  opacity: 0.8;
+  opacity: 1;
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
 
 .tour-button {
   padding: 0.8rem 2rem;
-  background: linear-gradient(135deg, var(--primary-green), var(--soothing-turquoise));
+  background: linear-gradient(
+    135deg,
+    var(--primary-green),
+    var(--soothing-turquoise)
+  );
   color: var(--text-light);
   border: none;
   border-radius: 25px;
   font-weight: 600;
+  margin-top: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
