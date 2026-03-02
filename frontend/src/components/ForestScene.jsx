@@ -12,44 +12,76 @@ function Ground() {
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
       <planeGeometry args={[300, 300]} />
-      <meshStandardMaterial color="#3c7a4a" roughness={1} metalness={0} />
+      <meshStandardMaterial color="#3c7a4aac" roughness={1} metalness={0} />
     </mesh>
   );
 }
 
 //function Player
+
 function Player() {
   const { camera } = useThree();
-  const velocity = useRef([0, 0]);
-  const speed = 0.2;
-
-  useFrame(() => {
-    camera.position.x += velocity.current[0];
-    camera.position.z += velocity.current[1];
+  const move = useRef({
+    forward: false,
+    backward: false,
+    left: false,
+    right: false,
   });
 
+  const speed = 0.15;
+
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "w") velocity.current[1] = -speed;
-      if (e.key === "s") velocity.current[1] = speed;
-      if (e.key === "a") velocity.current[0] = -speed;
-      if (e.key === "d") velocity.current[0] = speed;
+    const down = (e) => {
+      if (e.key === "w") move.current.forward = true;
+      if (e.key === "s") move.current.backward = true;
+      if (e.key === "a") move.current.left = true;
+      if (e.key === "d") move.current.right = true;
     };
 
-    const handleKeyUp = () => {
-      velocity.current = [0, 0];
+    const up = (e) => {
+      if (e.key === "w") move.current.forward = false;
+      if (e.key === "s") move.current.backward = false;
+      if (e.key === "a") move.current.left = false;
+      if (e.key === "d") move.current.right = false;
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("keydown", down);
+    window.addEventListener("keyup", up);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
+      window.removeEventListener("keydown", down);
+      window.removeEventListener("keyup", up);
     };
   }, []);
 
-  return <PointerLockControls />;
+  useFrame(() => {
+    const direction = camera.getWorldDirection(new THREE.Vector3());
+    direction.y = 0;
+    direction.normalize();
+
+    const right = new THREE.Vector3();
+    right.crossVectors(camera.up, direction).normalize();
+
+    if (move.current.forward)
+      camera.position.add(direction.clone().multiplyScalar(speed));
+
+    if (move.current.backward)
+      camera.position.add(direction.clone().multiplyScalar(-speed));
+
+    if (move.current.left)
+      camera.position.add(right.clone().multiplyScalar(speed));
+
+    if (move.current.right)
+      camera.position.add(right.clone().multiplyScalar(-speed));
+  });
+
+  return (
+    <OrbitControls
+      enableZoom={false}
+      enablePan={false}
+      maxPolarAngle={Math.PI / 2.1}
+    />
+  );
 }
 
 /* ---------- Simple Realistic Tree (No GLB Needed Now) ---------- */
@@ -96,21 +128,20 @@ export default function ForestScene() {
     <div style={{ height: "100vh", width: "100%" }}>
       <Canvas shadows camera={{ position: [0, 10, 30], fov: 60 }}>
         {/* Fog for depth */}
-        <fog attach="fog" args={["#1b2e1f", 20, 150]} />
 
         {/* Lights */}
         <ambientLight intensity={0.4} />
         <directionalLight
           position={[30, 40, 20]}
-          intensity={1.5}
-          color="#ffd27fcc"
+          intensity={1}
+          color="#ffd27f10"
           castShadow
         />
 
         {/* Sky */}
 
         {/* HDRI Environment */}
-        <Environment files="/hdri/suburban_garden_4k.hdr" background />
+        <Environment files="/hdri/meadow_4k.hdr" background />
 
         {/* Magical particles */}
         <Sparkles count={150} scale={[200, 30, 200]} size={3} speed={0.3} />
@@ -118,9 +149,9 @@ export default function ForestScene() {
         {/* Bloom effect */}
         <EffectComposer>
           <Bloom
-            intensity={0.4}
-            luminanceThreshold={0.4}
-            luminanceSmoothing={0.9}
+            intensity={0.1}
+            luminanceThreshold={0.1}
+            luminanceSmoothing={0.2}
           />
         </EffectComposer>
 
