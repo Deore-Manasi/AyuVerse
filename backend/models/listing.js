@@ -34,6 +34,7 @@ const listingSchema = new Schema({
     d: String,
   },
   family: String,
+  dosha: String,
   genus: String,
   size: String,
   voiceDesc: String,

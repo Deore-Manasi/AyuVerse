@@ -27,6 +27,7 @@ const samplePlants = [
       d: "Acts as a natural detoxifier.",
     },
     family: "Lamiaceae",
+    dosha: "kapha",
     genus: "Ocimum",
     size: "60 cm",
     voiceDesc:
@@ -61,6 +62,7 @@ const samplePlants = [
       d: "Enhances sleep quality.",
     },
     family: "Solanaceae",
+    dosha: "vata",
     genus: "Withania",
     size: "1.5 meters",
     voiceDesc:
@@ -95,6 +97,7 @@ const samplePlants = [
       d: "Promotes wound healing.",
     },
     family: "Asphodelaceae",
+    dosha: "pitta",
     genus: "Aloe",
     size: "1 meter",
     voiceDesc:
@@ -127,6 +130,7 @@ const samplePlants = [
       d: "Supports lung health.",
     },
     family: "Acanthaceae",
+    dosha: "kapha",
     genus: "Justicia",
     size: "3 meters",
     voiceDesc:
@@ -160,6 +164,7 @@ const samplePlants = [
       d: "Supports hair health.",
     },
     family: "Phyllanthaceae",
+    dosha: "pitta",
     genus: "Phyllanthus",
     size: "10 meters",
     voiceDesc:
@@ -192,6 +197,7 @@ const samplePlants = [
       d: "Supports cholesterol balance.",
     },
     family: "Combretaceae",
+    dosha: "pitta",
     genus: "Terminalia",
     size: "30 meters",
     voiceDesc:
@@ -224,6 +230,7 @@ const samplePlants = [
       d: "Cools the body.",
     },
     family: "Rutaceae",
+    dosha: "kapha",
     genus: "Aegle",
     size: "12 meters",
     voiceDesc:
@@ -257,6 +264,7 @@ const samplePlants = [
       d: "Acts as detoxifier.",
     },
     family: "Combretaceae",
+    dosha: "kapha",
     genus: "Terminalia",
     size: "25 meters",
     voiceDesc:
@@ -290,6 +298,7 @@ const samplePlants = [
       d: "Supports brain health.",
     },
     family: "Plantaginaceae",
+    dosha: "pitta",
     genus: "Bacopa",
     size: "Creeper",
     voiceDesc:
@@ -323,6 +332,7 @@ const samplePlants = [
       d: "Calms the mind.",
     },
     family: "Santalaceae",
+    dosha: "pitta",
     genus: "Santalum",
     size: "12 meters",
     voiceDesc:
@@ -356,6 +366,7 @@ const samplePlants = [
       d: "Detoxifies body.",
     },
     family: "Amaranthaceae",
+    dosha: "kapha",
     genus: "Achyranthes",
     size: "1 meter",
     voiceDesc:
@@ -389,6 +400,7 @@ const samplePlants = [
       d: "Supports respiratory health.",
     },
     family: "Zingiberaceae",
+    dosha: "kapha",
     genus: "Elettaria",
     size: "4 meters",
     voiceDesc:
@@ -422,6 +434,7 @@ const samplePlants = [
       d: "Boosts metabolism.",
     },
     family: "Zingiberaceae",
+    dosha: "kapha",
     genus: "Zingiber",
     size: "1 meter",
     voiceDesc:
@@ -454,6 +467,7 @@ const samplePlants = [
       d: "Reduces fever.",
     },
     family: "Menispermaceae",
+    dosha: "pitta",
     genus: "Tinospora",
     size: "Climber",
     voiceDesc:
@@ -487,6 +501,7 @@ const samplePlants = [
       d: "Promotes weight balance.",
     },
     family: "Apocynaceae",
+    dosha: "vata",
     genus: "Gymnema",
     size: "Climber",
     voiceDesc:
@@ -520,6 +535,7 @@ const samplePlants = [
       d: "Supports brain health.",
     },
     family: "Caprifoliaceae",
+    dosha: "vata",
     genus: "Nardostachys",
     size: "60 cm",
     voiceDesc:
@@ -553,6 +569,7 @@ const samplePlants = [
       d: "Detoxifies body.",
     },
     family: "Acanthaceae",
+    dosha: "pitta",
     genus: "Andrographis",
     size: "1 meter",
     voiceDesc:
@@ -586,6 +603,7 @@ const samplePlants = [
       d: "Supports nervous system.",
     },
     family: "Acoraceae",
+    dosha: "vata",
     genus: "Acorus",
     size: "1.5 meters",
     voiceDesc:
@@ -618,6 +636,7 @@ const samplePlants = [
       d: "Reduces acidity.",
     },
     family: "Fabaceae",
+    dosha: "pitta",
     genus: "Glycyrrhiza",
     size: "1 meter",
     voiceDesc:
@@ -651,6 +670,7 @@ const samplePlants = [
       d: "Balances metabolism.",
     },
     family: "Cyperaceae",
+    dosha: "kapha",
     genus: "Cyperus",
     size: "1 meter",
     voiceDesc:
@@ -684,6 +704,7 @@ const samplePlants = [
       d: "Supports oral hygiene.",
     },
     family: "Meliaceae",
+    dosha: "pitta",
     genus: "Azadirachta",
     size: "20 meters",
     voiceDesc:
@@ -717,6 +738,7 @@ const samplePlants = [
       d: "Supports digestion.",
     },
     family: "Fabaceae",
+    dosha: "kapha",
     genus: "Butea",
     size: "15 meters",
     voiceDesc:
@@ -749,6 +771,7 @@ const samplePlants = [
       d: "Detoxifies body.",
     },
     family: "Nyctaginaceae",
+    dosha: "pitta",
     genus: "Boerhavia",
     size: "60 cm",
     voiceDesc:
@@ -781,6 +804,7 @@ const samplePlants = [
       d: "Supports recovery.",
     },
     family: "Fabaceae",
+    dosha: "vata",
     genus: "Desmodium",
     size: "1 meter",
     voiceDesc:
@@ -813,6 +837,7 @@ const samplePlants = [
       d: "Supports nervous system.",
     },
     family: "Convolvulaceae",
+    dosha: "vata",
     genus: "Convolvulus",
     size: "40 cm",
     voiceDesc:
@@ -846,6 +871,7 @@ const samplePlants = [
       d: "Reduces stress.",
     },
     family: "Asparagaceae",
+    dosha: "vata",
     genus: "Asparagus",
     size: "2 meters",
     voiceDesc:
@@ -879,6 +905,7 @@ const samplePlants = [
       d: "Supports respiratory health.",
     },
     family: "Lauraceae",
+    dosha: "kapha",
     genus: "Cinnamomum",
     size: "15 meters",
     voiceDesc:
@@ -912,6 +939,7 @@ const samplePlants = [
       d: "Improves skin.",
     },
     family: "Zingiberaceae",
+    dosha: "kapha",
     genus: "Curcuma",
     size: "1 meter",
     voiceDesc:
@@ -945,6 +973,7 @@ const samplePlants = [
       d: "Improves oral hygiene.",
     },
     family: "Acanthaceae",
+    dosha: "kapha",
     genus: "Barleria",
     size: "1.5 meters",
     voiceDesc:
@@ -978,6 +1007,7 @@ const samplePlants = [
       d: "Acts as rejuvenative tonic.",
     },
     family: "Convolvulaceae",
+    dosha: "vata",
     genus: "Argyreia",
     size: "Climber spreading several meters",
     voiceDesc:
@@ -1009,6 +1039,7 @@ const samplePlants = [
       d: "Detoxifies body.",
     },
     family: "Fabaceae",
+    dosha: "kapha",
     genus: "Alhagi",
     size: "1 meter",
     voiceDesc:
