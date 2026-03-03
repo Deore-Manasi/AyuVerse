@@ -162,7 +162,7 @@
 // }
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
+import { Environment, OrbitControls, useGLTF, Html } from "@react-three/drei";
 import { Suspense, useRef, useState } from "react";
 import * as THREE from "three";
 
@@ -194,15 +194,48 @@ function PlantModel({ plant, position, onClick }) {
   });
 
   return (
-    <primitive
-      ref={ref}
-      object={scene}
-      scale={2}
-      position={position}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-      onClick={() => onClick(plant)}
-    />
+    <group position={position}>
+      <primitive
+        ref={ref}
+        object={scene}
+        scale={8}
+        onPointerOver={() => {
+          document.body.style.cursor = "pointer";
+          setHovered(true);
+        }}
+        onPointerOut={() => {
+          document.body.style.cursor = "default";
+          setHovered(false);
+        }}
+        onClick={() => onClick(plant)}
+      />
+
+      {/* 🌿 Hover Name */}
+      {hovered && (
+        <Html position={[0, 10, 0]} center>
+          <div
+            style={{
+              background: "rgba(168, 235, 104, 0.65)",
+
+              borderRadius: "10px",
+              color: "#114603",
+              width: "150px",
+              height: "50px",
+              fontSize: "18px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
+              fontWeight: "800",
+              whiteSpace: "nowrap",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+            }}
+          >
+            {plant.plantName}
+          </div>
+        </Html>
+      )}
+    </group>
   );
 }
 
@@ -223,15 +256,21 @@ export default function ForestScene({ plants = [], onPlantClick }) {
         <Environment files="/hdri/meadow_4k.hdr" background />
 
         <Suspense fallback={null}>
-          {validPlants.map((plant) => {
-            const randomX = Math.random() * 20 - 10; // spread left-right
-            const randomZ = Math.random() * 20 - 10; // spread forward-back
+          {validPlants.map((plant, index) => {
+            const radiusStep = 10; // increase for wider spread
+            const angleStep = 4; // increase for more separation
+
+            const angle = index * angleStep;
+            const radius = 15 * Math.sqrt(index + 1);
+
+            const x = radius * Math.cos(angle);
+            const z = radius * Math.sin(angle);
 
             return (
               <PlantModel
                 key={plant._id}
                 plant={plant}
-                position={[randomX, -4, randomZ]}
+                position={[x, -2, z]}
                 onClick={onPlantClick}
               />
             );

@@ -27,7 +27,7 @@ export default function Plantview({ plant, position, onClick }) {
     <primitive
       ref={ref}
       object={scene}
-      scale={2}
+      scale={8}
       position={position}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
