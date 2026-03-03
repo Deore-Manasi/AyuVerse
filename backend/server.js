@@ -52,6 +52,20 @@ app.get("/listings/:name", async (req, res) => {
   }
 });
 
+//Show route for plants by type: vata, pitta, kapha
+
+app.get("/listings/tour/:dosha", async (req, res) => {
+  try {
+    const plants = await Listing.find({
+      dosha: req.params.dosha.toLowerCase(),
+    });
+
+    res.json(plants);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });
