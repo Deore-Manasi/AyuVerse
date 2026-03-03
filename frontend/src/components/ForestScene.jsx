@@ -215,10 +215,11 @@ function PlantModel({ plant, position, onClick }) {
         <Html position={[0, 10, 0]} center>
           <div
             style={{
-              background: "rgba(168, 235, 104, 0.65)",
+              background: "rgba(106, 235, 244, 0.66)",
 
-              borderRadius: "10px",
-              color: "#114603",
+              borderRadius: "10px ",
+              border: "2px dashed #043060",
+              color: "rgb(4, 48, 96)",
               width: "150px",
               height: "50px",
               fontSize: "18px",
