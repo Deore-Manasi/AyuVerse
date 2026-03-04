@@ -41,6 +41,7 @@ const btnStyle = {
   width: "100%",
   background: "gold",
   border: "none",
+  borderRadius: "10px",
   cursor: "pointer",
 };
 
@@ -49,6 +50,7 @@ const closeStyle = {
   padding: "8px",
   width: "100%",
   background: "#e9e2e2",
+  borderRadius: "10px",
   border: "none",
   cursor: "pointer",
 };
