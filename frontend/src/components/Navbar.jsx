@@ -100,9 +100,9 @@ const Navbar = ({ theme, toggleTheme }) => {
           </li>
           <li>
             <Link
-              to="/3d-visualizer"
+              to="/diet-chart"
               className={`navbar-link ${
-                isActive("/3d-visualizer") ? "active" : ""
+                isActive("/diet-chart") ? "active" : ""
               }`}
             >
               Diet Chart

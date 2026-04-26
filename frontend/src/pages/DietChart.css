@@ -1,0 +1,685 @@
+/* ===== AyuVerse Diet Chart - Matching Project Theme ===== */
+
+.diet-chart-page {
+  min-height: 100vh;
+  background-color: #faf8f4;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== HERO ===== */
+.diet-hero {
+  background: linear-gradient(135deg, #2d6a4f 0%, #40916c 50%, #52b788 100%);
+  padding: 60px 40px 50px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.diet-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.diet-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.diet-hero-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.diet-hero-title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 12px;
+  letter-spacing: -0.5px;
+}
+
+.diet-hero-subtitle {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+.diet-hero-leaves {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.leaf {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.8;
+  animation: floatLeaf 6s ease-in-out infinite;
+}
+
+.leaf-1 {
+  top: 20%;
+  left: 8%;
+  animation-delay: 0s;
+}
+.leaf-2 {
+  top: 50%;
+  right: 10%;
+  animation-delay: 2s;
+  font-size: 1.4rem;
+}
+.leaf-3 {
+  bottom: 15%;
+  left: 20%;
+  animation-delay: 4s;
+  font-size: 1.6rem;
+}
+
+@keyframes floatLeaf {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(8deg);
+  }
+}
+
+/* ===== MAIN LAYOUT ===== */
+.diet-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* ===== FORM ===== */
+.diet-form-wrapper {
+  transition: all 0.4s ease;
+}
+
+.diet-form {
+  background: #fff;
+  border-radius: 20px;
+  padding: 36px;
+  box-shadow: 0 4px 24px rgba(45, 106, 79, 0.08);
+  border: 1px solid #e8f0eb;
+}
+
+.form-section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1b4332;
+  margin: 0 0 28px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #d8f0e2;
+}
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2d6a4f;
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+
+.required {
+  color: #e07a5f;
+}
+
+.form-input {
+  width: 100%;
+  padding: 11px 16px;
+  border: 1.5px solid #d0e8d8;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #1b4332;
+  background: #f8fdf9;
+  transition: all 0.2s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  border-color: #40916c;
+  box-shadow: 0 0 0 3px rgba(64, 145, 108, 0.12);
+  background: #fff;
+}
+
+.form-input::placeholder {
+  color: #9ab8a5;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ===== DOSHA SELECTOR ===== */
+.dosha-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.dosha-card {
+  padding: 16px 12px;
+  border: 2px solid #d0e8d8;
+  border-radius: 14px;
+  background: #f8fdf9;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s ease;
+  text-align: center;
+}
+
+.dosha-card:hover {
+  border-color: var(--dosha-color);
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+}
+
+.dosha-active {
+  border-color: var(--dosha-color) !important;
+  background: #fff !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.dosha-active .dosha-name {
+  color: var(--dosha-color);
+}
+
+.dosha-emoji {
+  font-size: 1.8rem;
+}
+
+.dosha-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1b4332;
+}
+
+.dosha-desc {
+  font-size: 0.72rem;
+  color: #6b8f78;
+  line-height: 1.4;
+}
+
+/* ===== SEASON PILLS ===== */
+.season-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.season-pill {
+  padding: 7px 16px;
+  border: 1.5px solid #d0e8d8;
+  border-radius: 20px;
+  background: #f8fdf9;
+  color: #2d6a4f;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.season-pill:hover {
+  border-color: #40916c;
+  background: #fff;
+}
+
+.season-active {
+  background: #2d6a4f !important;
+  color: #fff !important;
+  border-color: #2d6a4f !important;
+}
+
+/* ===== ERROR ===== */
+.form-error {
+  color: #c0392b;
+  font-size: 0.88rem;
+  background: #fdf0ee;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border-left: 3px solid #e07a5f;
+  margin-bottom: 16px;
+}
+
+/* ===== GENERATE BUTTON ===== */
+.generate-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #2d6a4f, #40916c);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.3px;
+  margin-top: 4px;
+}
+
+.generate-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1b4332, #2d6a4f);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(45, 106, 79, 0.3);
+}
+
+.generate-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== LOADING ===== */
+.loading-section {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.loading-animation {
+  text-align: center;
+  color: #2d6a4f;
+}
+
+.loading-leaf {
+  font-size: 3rem;
+  animation: bounce 1s ease-in-out infinite;
+  margin-bottom: 12px;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.loading-animation p {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #40916c;
+  margin-bottom: 12px;
+}
+
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.loading-dots span {
+  width: 8px;
+  height: 8px;
+  background: #40916c;
+  border-radius: 50%;
+  animation: dotPulse 1.2s ease-in-out infinite;
+}
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* ===== RESULTS ===== */
+.result-section {
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-header {
+  margin-bottom: 24px;
+}
+
+.result-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.result-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #1b4332;
+  margin: 0;
+}
+
+.reset-btn {
+  padding: 8px 20px;
+  border: 2px solid #40916c;
+  background: transparent;
+  color: #40916c;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+  background: #40916c;
+  color: #fff;
+}
+
+.result-goal-tag {
+  display: inline-block;
+  background: #d8f3e3;
+  color: #2d6a4f;
+  padding: 4px 14px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.season-tag {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* Overview */
+.overview-card {
+  background: linear-gradient(135deg, #f0faf4, #e8f5ed);
+  border: 1px solid #b7e0c8;
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 28px;
+  border-left: 4px solid #40916c;
+}
+
+.overview-card p {
+  color: #1b4332;
+  font-size: 0.97rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ===== MEAL CARDS ===== */
+.meals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.meal-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 2px 16px rgba(45, 106, 79, 0.07);
+  border: 1px solid #e8f0eb;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.meal-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(22, 48, 36, 0.685);
+}
+
+.meal-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eef5f0;
+}
+
+.meal-icon {
+  font-size: 1.5rem;
+}
+
+.meal-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1b4332;
+  margin: 0;
+  flex: 1;
+}
+
+.meal-time {
+  font-size: 0.75rem;
+  color: #6c997c;
+  background: #f0faf4;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.meal-items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+}
+
+.meal-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 0.9rem;
+  color: #013821;
+  text-transform: capitalize;
+  line-height: 1.5;
+  border-bottom: 1px dashed #f0f5f2;
+}
+
+.meal-item:last-child {
+  border-bottom: none;
+}
+
+.meal-dot {
+  color: #033920;
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+
+.meal-tip {
+  background: #fffbeb;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  color: #92400e;
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  margin-top: 10px;
+  border: 1px solid #fde68a;
+}
+
+/* ===== AVOID / HERBS / TIPS ===== */
+.section-subtitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #01381f;
+  margin: 0 0 14px;
+}
+
+.avoid-section,
+.herbs-section,
+.tips-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 12px rgba(45, 106, 79, 0.06);
+  border: 1px solid #e8f0eb;
+}
+
+.avoid-tags,
+.herbs-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.avoid-tag {
+  padding: 6px 14px;
+  background: #fef0ee;
+  color: #c0392b;
+  border-radius: 20px;
+  font-size: 0.84rem;
+  text-transform: capitalize;
+  font-weight: 500;
+  border: 1px solid #fad4cc;
+}
+
+.herb-tag {
+  padding: 6px 14px;
+  background: #f0faf4;
+  color: #2d6a4f;
+  border-radius: 20px;
+  font-size: 0.84rem;
+  text-transform: capitalize;
+  font-weight: 500;
+  border: 1px solid #b7e0c8;
+}
+
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tip-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 16px;
+  background: #f8fdf9;
+  border-radius: 10px;
+  border: 1px solid #e2f0e8;
+}
+
+.tip-number {
+  width: 26px;
+  height: 26px;
+  background: #2d6a4f;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  text-decoration: solid black;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.tip-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #2d4a3e;
+  line-height: 1.6;
+  text-transform: capitalize;
+  padding-top: 2px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .diet-hero-title {
+    font-size: 1.9rem;
+  }
+  .diet-form {
+    padding: 24px 18px;
+  }
+  .dosha-selector {
+    grid-template-columns: 1fr;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .meals-grid {
+    grid-template-columns: 1fr;
+  }
+  .result-title {
+    font-size: 1.3rem;
+  }
+  .diet-main {
+    padding: 24px 16px 40px;
+  }
+}

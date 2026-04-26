@@ -13,6 +13,7 @@ import Visualizer3D from "./pages/Visualizer3D";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
+import DietChart from "./pages/DietChart";
 import "./App.css";
 import axios from "axios";
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/plant/:name" element={<PlantDetail />} />
           <Route path="/herbal-chatbot" element={<HerbalChatbot />} />
           <Route path="/3d-visualizer" element={<Visualizer3D />} />
+          <Route path="/diet-chart" element={<DietChart />} />
           <Route path="/virtual-tour" element={<VirtualTour />} />
           <Route path="/vata" element={<VataZone />} />
           <Route path="/pitta" element={<PittaZone />} />
