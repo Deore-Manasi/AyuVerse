@@ -145,9 +145,12 @@
 // }
 
 // export default ExplorePlants
+
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import PlantCard from "../components/PlantCard";
+import { useLanguage } from "../context/LanguageContext";
+import { t } from "../utils/translate";
 import "./ExplorePlants.css";
 
 const FILTER_OPTIONS = [
@@ -164,6 +167,8 @@ const ExplorePlants = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("All");
+  const { language } = useLanguage();
+  const txt = t[language];
 
   // ✅ Fetch from backend
   useEffect(() => {
@@ -204,14 +209,12 @@ const ExplorePlants = () => {
   return (
     <div className="explore-plants">
       <div className="explore-plants-header">
-        <h1 className="explore-plants-title">
-          Explore the Healing Power of Plants and Herbs
-        </h1>
+        <h1 className="explore-plants-title">{txt.exploreTitle}</h1>
 
         <div className="search-container">
           <input
             type="text"
-            placeholder="Search Your Herbal Plant By Name!"
+            placeholder={txt.searchPlaceholder}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"

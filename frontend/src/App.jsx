@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import DietChart from "./pages/DietChart";
+import { LanguageProvider } from "./context/LanguageContext";
 import "./App.css";
 import axios from "axios";
 
@@ -45,22 +46,24 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar theme={theme} toggleTheme={toggleTheme} />
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/explore-plants" element={<ExplorePlants />} />
-          <Route path="/plant/:name" element={<PlantDetail />} />
-          <Route path="/herbal-chatbot" element={<HerbalChatbot />} />
-          <Route path="/3d-visualizer" element={<Visualizer3D />} />
-          <Route path="/diet-chart" element={<DietChart />} />
-          <Route path="/virtual-tour" element={<VirtualTour />} />
-          <Route path="/vata" element={<VataZone />} />
-          <Route path="/pitta" element={<PittaZone />} />
-          <Route path="/kapha" element={<KaphaZone />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-        </Routes>
+        <LanguageProvider>
+          <Navbar theme={theme} toggleTheme={toggleTheme} />
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/explore-plants" element={<ExplorePlants />} />
+            <Route path="/plant/:name" element={<PlantDetail />} />
+            <Route path="/herbal-chatbot" element={<HerbalChatbot />} />
+            <Route path="/3d-visualizer" element={<Visualizer3D />} />
+            <Route path="/diet-chart" element={<DietChart />} />
+            <Route path="/virtual-tour" element={<VirtualTour />} />
+            <Route path="/vata" element={<VataZone />} />
+            <Route path="/pitta" element={<PittaZone />} />
+            <Route path="/kapha" element={<KaphaZone />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+          </Routes>
+        </LanguageProvider>
       </div>
     </Router>
   );

@@ -1,69 +1,75 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import './Login.css'
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
+import { t } from "../utils/translate";
+
+import "./Login.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  })
-  const [errors, setErrors] = useState({})
-  const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const { language } = useLanguage();
+  const txt = t[language];
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
+    const { name, value } = e.target;
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
-    }))
+      [name]: value,
+    }));
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ''
-      }))
+        [name]: "",
+      }));
     }
-  }
+  };
 
   const validateForm = () => {
-    const newErrors = {}
-    
+    const newErrors = {};
+
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required'
+      newErrors.email = txt.emailRequired;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid'
+      newErrors.email = txt.emailInvalid;
     }
-    
+
     if (!formData.password) {
-      newErrors.password = 'Password is required'
+      newErrors.password = txt.passwordRequired;
     } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters'
+      newErrors.password = txt.passwordMinLength;
     }
-    
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     if (!validateForm()) {
-      return
+      return;
     }
-    
-    setIsLoading(true)
-    
+
+    setIsLoading(true);
+
     // Simulate API call
     setTimeout(() => {
       // Store user session (in real app, this would be handled by backend)
-      localStorage.setItem('isAuthenticated', 'true')
-      localStorage.setItem('userEmail', formData.email)
-      setIsLoading(false)
-      navigate('/')
-    }, 1000)
-  }
+      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("userEmail", formData.email);
+      setIsLoading(false);
+      navigate("/");
+    }, 1000);
+  };
 
   return (
     <div className="login-page">
@@ -74,66 +80,69 @@ const Login = () => {
         transition={{ duration: 0.5 }}
       >
         <div className="login-header">
-          <h1>Welcome Back</h1>
-          <p>Sign in to continue your Ayurvedic journey</p>
+          <h1>{txt.welcomeBack}</h1>
+          <p>{txt.loginSubtitle}</p>
         </div>
 
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">{txt.emailAddress}</label>
             <input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={errors.email ? 'error' : ''}
-              placeholder="Enter your email"
+              className={errors.email ? "error" : ""}
+              placeholder={txt.emailPlaceholder}
             />
-            {errors.email && <span className="error-message">{errors.email}</span>}
+            {errors.email && (
+              <span className="error-message">{errors.email}</span>
+            )}
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{txt.password}</label>
             <input
               type="password"
               id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className={errors.password ? 'error' : ''}
-              placeholder="Enter your password"
+              className={errors.password ? "error" : ""}
+              placeholder={txt.loginPasswordPlaceholder}
             />
-            {errors.password && <span className="error-message">{errors.password}</span>}
+            {errors.password && (
+              <span className="error-message">{errors.password}</span>
+            )}
           </div>
 
           <div className="form-options">
             <label className="remember-me">
               <input type="checkbox" />
-              <span>Remember me</span>
+              <span>{txt.rememberMe}</span>
             </label>
             <Link to="/forgot-password" className="forgot-password">
-              Forgot password?
+              {txt.forgotPassword}
             </Link>
           </div>
 
           <button type="submit" className="submit-button" disabled={isLoading}>
-            {isLoading ? 'Signing in...' : 'Sign In'}
+            {isLoading ? txt.signingIn : txt.signIn}
           </button>
         </form>
 
         <div className="login-footer">
           <p>
-            Don't have an account?{' '}
+            {txt.noAccount}{" "}
             <Link to="/register" className="link-text">
-              Sign up here
+              {txt.signUpHere}
             </Link>
           </p>
         </div>
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
-
+export default Login;

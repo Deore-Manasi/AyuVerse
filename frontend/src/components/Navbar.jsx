@@ -1,12 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
+import { t } from "../utils/translate";
 import "./Navbar.css";
 import logo from "../assets/LOGO1.png"; // Import logo
 
 const Navbar = ({ theme, toggleTheme }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  //---- for the languge context ----
+  const { language, setLanguage } = useLanguage();
+  const txt = t[language];
 
   // ----- State & refs -----
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -64,7 +69,7 @@ const Navbar = ({ theme, toggleTheme }) => {
           />
           <div className="logo-text-container">
             <span className="logo-text">आयुVerse</span>
-            <span className="logo-subtitle">The Universe of Ayurveda</span>
+            <span className="logo-subtitle">{txt.tagline}</span>
           </div>
         </Link>
 
@@ -75,7 +80,7 @@ const Navbar = ({ theme, toggleTheme }) => {
               to="/"
               className={`navbar-link ${isActive("/") ? "active" : ""}`}
             >
-              Home
+              {txt.home}
             </Link>
           </li>
           <li>
@@ -85,7 +90,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                 isActive("/explore-plants") ? "active" : ""
               }`}
             >
-              Explore Plants
+              {txt.explorePlants}
             </Link>
           </li>
           <li>
@@ -95,7 +100,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                 isActive("/herbal-chatbot") ? "active" : ""
               }`}
             >
-              Herbal Chatbot
+              {txt.herbalChatbot}
             </Link>
           </li>
           <li>
@@ -105,7 +110,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                 isActive("/diet-chart") ? "active" : ""
               }`}
             >
-              Diet Chart
+              {txt.dietChart}
             </Link>
           </li>
           <li>
@@ -115,10 +120,30 @@ const Navbar = ({ theme, toggleTheme }) => {
                 isActive("/virtual-tour") ? "active" : ""
               }`}
             >
-              Virtual Tour
+              {txt.virtualTour}
             </Link>
           </li>
         </ul>
+
+        <select
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
+          style={{
+            padding: "8px 12px",
+            borderRadius: "20px",
+            border: "1.5px solid #d0e8d8",
+            background: "#f8fdf9",
+            color: "#2d6a4f",
+            fontWeight: "600",
+            fontSize: "0.85rem",
+            cursor: "pointer",
+            outline: "none",
+          }}
+        >
+          <option value="English">🇬🇧 ENGLISH</option>
+          <option value="Hindi">🇮🇳 HINDI</option>
+          <option value="Marathi">🇮🇳 MARATHI</option>
+        </select>
 
         {/* --- THEME + PROFILE BUTTONS --- */}
         <div className="navbar-controls">
@@ -192,7 +217,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                           <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                        <span>My Profile</span>
+                        <span>{txt.myProfile}</span>
                       </Link>
                       <Link
                         to="/settings"
@@ -210,7 +235,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                           <circle cx="12" cy="12" r="3"></circle>
                           <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3"></path>
                         </svg>
-                        <span>Settings</span>
+                        <span>{txt.settings}</span>
                       </Link>
                       <div className="dropdown-divider"></div>
                       <button
@@ -229,7 +254,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                           <polyline points="16 17 21 12 16 7"></polyline>
                           <line x1="21" y1="12" x2="9" y2="12"></line>
                         </svg>
-                        <span>Logout</span>
+                        <span>{txt.logout}</span>
                       </button>
                     </>
                   ) : (
@@ -251,7 +276,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                           <polyline points="10 17 15 12 10 7"></polyline>
                           <line x1="15" y1="12" x2="3" y2="12"></line>
                         </svg>
-                        <span>Sign In</span>
+                        <span>{txt.signIn}</span>
                       </Link>
                       <Link
                         to="/register"
@@ -271,7 +296,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                           <line x1="20" y1="8" x2="20" y2="14"></line>
                           <line x1="23" y1="11" x2="17" y2="11"></line>
                         </svg>
-                        <span>Sign Up</span>
+                        <span>{txt.signUp}</span>
                       </Link>
                     </>
                   )}

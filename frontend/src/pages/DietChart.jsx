@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
+import { t } from "../utils/translate";
 import "./DietChart.css";
 
 const mealIcons = {
@@ -42,6 +44,9 @@ const DietChart = () => {
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
+  const { language } = useLanguage();
+  const txt = t[language];
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -53,7 +58,7 @@ const DietChart = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.dosha) {
-      setError("Please select your Dosha type.");
+      setError(txt.doshaRequired);
       return;
     }
     setError("");
@@ -72,10 +77,10 @@ const DietChart = () => {
       if (data.success) {
         setDietChart(data.dietChart);
       } else {
-        setError(data.message || "Failed to generate diet chart.");
+        setError(data.message || txt.generateFailed);
       }
     } catch (err) {
-      setError("Server error. Please make sure backend is running.");
+      setError(txt.serverError);
     } finally {
       setLoading(false);
     }
@@ -100,11 +105,9 @@ const DietChart = () => {
       {/* Hero Section */}
       <div className="diet-hero">
         <div className="diet-hero-content">
-          <span className="diet-hero-badge">🌿 Ayurvedic Nutrition</span>
-          <h1 className="diet-hero-title">Personalized Diet Chart</h1>
-          <p className="diet-hero-subtitle">
-            Discover the right foods for your unique body constitution
-          </p>
+          <span className="diet-hero-badge">{txt.dietBadge}</span>
+          <h1 className="diet-hero-title">{txt.dietTitle}</h1>
+          <p className="diet-hero-subtitle">{txt.dietSubtitle}</p>
         </div>
         <div className="diet-hero-leaves">
           <span className="leaf leaf-1">🍃</span>
@@ -119,12 +122,12 @@ const DietChart = () => {
           className={`diet-form-wrapper ${submitted && dietChart ? "form-shrink" : ""}`}
         >
           <form className="diet-form" onSubmit={handleSubmit}>
-            <h2 className="form-section-title">Your Profile</h2>
+            <h2 className="form-section-title">{txt.yourProfile}</h2>
 
             {/* Dosha Selector */}
             <div className="form-group">
               <label className="form-label">
-                Select Your Dosha Type <span className="required">*</span>
+                {txt.selectDosha} <span className="required">*</span>
               </label>
               <div className="dosha-selector">
                 {Object.entries(doshaInfo).map(([key, val]) => (
@@ -146,7 +149,7 @@ const DietChart = () => {
             {/* Age & Weight */}
             <div className="form-row">
               <div className="form-group">
-                <label className="form-label">Age</label>
+                <label className="form-label">{txt.age}</label>
                 <input
                   type="number"
                   name="age"
@@ -159,7 +162,7 @@ const DietChart = () => {
                 />
               </div>
               <div className="form-group">
-                <label className="form-label">Weight (kg)</label>
+                <label className="form-label">{txt.weight}</label>
                 <input
                   type="number"
                   name="weight"
@@ -173,27 +176,27 @@ const DietChart = () => {
 
             {/* Health Goal */}
             <div className="form-group">
-              <label className="form-label">Health Goal</label>
+              <label className="form-label">{txt.healthGoal}</label>
               <select
                 name="healthGoal"
                 className="form-input"
                 value={formData.healthGoal}
                 onChange={handleChange}
               >
-                <option value="">Select a goal...</option>
-                <option value="Weight Loss">Weight Loss</option>
-                <option value="Weight Gain">Weight Gain</option>
-                <option value="Improve Digestion">Improve Digestion</option>
-                <option value="Boost Immunity">Boost Immunity</option>
-                <option value="Stress Relief">Stress Relief</option>
-                <option value="Better Sleep">Better Sleep</option>
-                <option value="General Wellness">General Wellness</option>
+                <option value="">{txt.selectGoal}</option>
+                <option value="Weight Loss">{txt.weightLoss}</option>
+                <option value="Weight Gain">{txt.weightGain}</option>
+                <option value="Improve Digestion">{txt.digestion}</option>
+                <option value="Boost Immunity">{txt.immunity}</option>
+                <option value="Stress Relief">{txt.stress}</option>
+                <option value="Better Sleep">{txt.sleep}</option>
+                <option value="General Wellness">{txt.wellness}</option>
               </select>
             </div>
 
             {/* Season */}
             <div className="form-group">
-              <label className="form-label">Current Season</label>
+              <label className="form-label">{txt.season}</label>
               <div className="season-pills">
                 {["Spring", "Summer", "Monsoon", "Autumn", "Winter"].map(
                   (s) => (
@@ -212,12 +215,12 @@ const DietChart = () => {
 
             {/* Allergies */}
             <div className="form-group">
-              <label className="form-label">Allergies / Avoid Foods</label>
+              <label className="form-label">{txt.allergies}</label>
               <input
                 type="text"
                 name="allergies"
                 className="form-input"
-                placeholder="e.g. dairy, nuts, gluten (optional)"
+                placeholder={txt.allergiesPlaceholder}
                 value={formData.allergies}
                 onChange={handleChange}
               />
@@ -228,10 +231,10 @@ const DietChart = () => {
             <button type="submit" className="generate-btn" disabled={loading}>
               {loading ? (
                 <span className="btn-loading">
-                  <span className="spinner"></span> Generating your plan...
+                  <span className="spinner"></span> {txt.generating}
                 </span>
               ) : (
-                "🌿 Generate My Diet Chart"
+                txt.generateBtn
               )}
             </button>
           </form>
@@ -242,7 +245,7 @@ const DietChart = () => {
           <div className="loading-section">
             <div className="loading-animation">
               <div className="loading-leaf">🌿</div>
-              <p>Crafting your Ayurvedic meal plan...</p>
+              <p>{txt.crafting}</p>
               <div className="loading-dots">
                 <span></span>
                 <span></span>
@@ -261,7 +264,7 @@ const DietChart = () => {
                   Plan
                 </h2>
                 <button className="reset-btn" onClick={handleReset}>
-                  ↺ New Chart
+                  {txt.newChart}
                 </button>
               </div>
               {formData.healthGoal && (
@@ -316,7 +319,7 @@ const DietChart = () => {
             {/* Foods to Avoid */}
             {dietChart.avoid && dietChart.avoid.length > 0 && (
               <div className="avoid-section">
-                <h3 className="section-subtitle">🚫 Foods to Avoid</h3>
+                <h3 className="section-subtitle">{txt.foodsToAvoid}</h3>
                 <div className="avoid-tags">
                   {dietChart.avoid.map((item, i) => (
                     <span key={i} className="avoid-tag">
@@ -330,9 +333,7 @@ const DietChart = () => {
             {/* Herbs & Spices */}
             {dietChart.herbs && dietChart.herbs.length > 0 && (
               <div className="herbs-section">
-                <h3 className="section-subtitle">
-                  🌿 Recommended Herbs & Spices
-                </h3>
+                <h3 className="section-subtitle">{txt.herbsSpices}</h3>
                 <div className="herbs-tags">
                   {dietChart.herbs.map((herb, i) => (
                     <span key={i} className="herb-tag">
@@ -346,7 +347,7 @@ const DietChart = () => {
             {/* Daily Tips */}
             {dietChart.dailyTips && dietChart.dailyTips.length > 0 && (
               <div className="tips-section">
-                <h3 className="section-subtitle">✨ Daily Wellness Tips</h3>
+                <h3 className="section-subtitle">{txt.dailyTips}</h3>
                 <div className="tips-list">
                   {dietChart.dailyTips.map((tip, i) => (
                     <div key={i} className="tip-card">

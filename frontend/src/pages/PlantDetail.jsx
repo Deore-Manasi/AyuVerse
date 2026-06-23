@@ -957,12 +957,17 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
+import { t } from "../utils/translate";
 import "./NPlantDetail.css";
 import Plant3DViewer from "../components/Plant3DViewer";
 
 const PlantDetail = () => {
   const { name } = useParams();
   const navigate = useNavigate();
+
+  const { language } = useLanguage();
+  const txt = t[language];
 
   const [plant, setPlant] = useState(null);
   const [activeTab, setActiveTab] = useState("3d");
@@ -1021,7 +1026,7 @@ const PlantDetail = () => {
   if (!plant) {
     return (
       <div className="plant-detail">
-        <h6>Load...</h6>
+        <h6>{txt.loading}</h6>
       </div>
     );
   }
@@ -1031,14 +1036,14 @@ const PlantDetail = () => {
       {/* HEADER */}
       <div className="plant-detail-header">
         <Link to="/" className="header-home-link">
-          Back to Home
+          {txt.backToHome}
         </Link>
 
         <button
           className="header-back-button"
           onClick={() => navigate("/explore-plants")}
         >
-          Go Back
+          {txt.goBack}
         </button>
       </div>
 
@@ -1047,11 +1052,11 @@ const PlantDetail = () => {
         {/* LEFT COLUMN */}
         <div className="plant-info-column">
           {[
-            ["Plant Size", plant.plantSize],
-            ["Native Region", plant.nativeRegion],
-            ["Preferred Climate", plant.preferredClimate],
-            ["Required Sunlight", plant.reqSunlight],
-            ["Required Soil", plant.reqSoil],
+            [txt.plantSize, plant.plantSize],
+            [txt.nativeRegion, plant.nativeRegion],
+            [txt.preferredClimate, plant.preferredClimate],
+            [txt.requiredSunlight, plant.reqSunlight],
+            [txt.requiredSoil, plant.reqSoil],
           ].map(([label, value], i) => (
             <div className="info-card" key={i}>
               <div className="info-card-text">
@@ -1091,21 +1096,21 @@ const PlantDetail = () => {
               className={`plant-tab ${activeTab === "3d" ? "active" : ""}`}
               onClick={() => setActiveTab("3d")}
             >
-              3D View
+              {txt.view3D}
             </button>
 
             <button
               className="plant-tab"
               onClick={() => setShowAyushModal(true)}
             >
-              Holistic Uses
+              {txt.holisticUses}
             </button>
 
             <button
               className="plant-tab"
               onClick={() => setShowHealthModal(true)}
             >
-              Benefits
+              {txt.benefits}
             </button>
           </div>
         </div>
@@ -1113,10 +1118,10 @@ const PlantDetail = () => {
         {/* RIGHT COLUMN */}
         <div className="medicinal-info-column">
           {[
-            ["Part Used", plant.partMedicine],
-            ["Active Compounds", plant.activeCompounds],
-            ["Therapeutic Properties", plant.therapeuticProp],
-            ["Dosage Form", plant.dosageForm],
+            [txt.partUsed, plant.partMedicine],
+            [txt.activeCompounds, plant.activeCompounds],
+            [txt.therapeuticProperties, plant.therapeuticProp],
+            [txt.dosageForm, plant.dosageForm],
           ].map(([label, value], i) => (
             <div className="info-card" key={i}>
               <div className="info-card-text">
@@ -1135,7 +1140,7 @@ const PlantDetail = () => {
             <div className="modal-content ayush-modal">
               <div className="modal-header">
                 <div className="modal-title">
-                  <h2>AYUSH Applications</h2>
+                  <h2>{txt.ayushApplications}</h2>
                 </div>
               </div>
 
@@ -1155,7 +1160,7 @@ const PlantDetail = () => {
                   className="modal-close-button"
                   onClick={() => setShowAyushModal(false)}
                 >
-                  Close
+                  {txt.close}
                 </button>
               </div>
             </div>
@@ -1170,7 +1175,7 @@ const PlantDetail = () => {
             <div className="modal-content health-modal">
               <div className="modal-header">
                 <div className="modal-title">
-                  <h2>Health Benefits</h2>
+                  <h2>{txt.healthBenefits}</h2>
                 </div>
               </div>
 

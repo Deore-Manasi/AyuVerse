@@ -89,28 +89,32 @@
 
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../context/LanguageContext";
+import { t } from "../utils/translate";
 import "./VirtualTour.css";
 
 const VirtualTour = () => {
   const navigate = useNavigate();
 
+  const { language } = useLanguage();
+  const txt = t[language];
   const zones = [
     {
       id: 1,
-      title: "Vata Zone 💨",
-      description: "Air & Space element – calming and grounding herbs",
+      title: `${txt.vataZone} 💨`,
+      description: txt.vataDesc,
       route: "/vata",
     },
     {
       id: 2,
-      title: "Pitta Zone 🔥",
-      description: "Fire element – cooling and soothing plants",
+      title: `${txt.pittaZone} 🔥`,
+      description: txt.pittaDesc,
       route: "/pitta",
     },
     {
       id: 3,
-      title: "Kapha Zone 🌊",
-      description: "Earth & Water element – energizing herbs",
+      title: `${txt.kaphaZone} 🌊`,
+      description: txt.kaphaDesc,
       route: "/kapha",
     },
   ];
@@ -122,8 +126,8 @@ const VirtualTour = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        <h1>3D Ayurvedic Forest</h1>
-        <p>Choose a Dosha Zone to Begin Your Immersive Journey</p>
+        <h1>{txt.tourTitle}</h1>
+        <p>{txt.tourSubtitle}</p>
       </motion.div>
 
       <div className="tour-grid">
@@ -139,7 +143,7 @@ const VirtualTour = () => {
               className="tour-button"
               onClick={() => navigate(zone.route)}
             >
-              Enter Zone
+              {txt.enterZone}
             </button>
           </motion.div>
         ))}

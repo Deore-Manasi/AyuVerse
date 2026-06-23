@@ -1,48 +1,53 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import './ForgotPassword.css'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
+import { t } from "../utils/translate";
+import "./ForgotPassword.css";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState('')
-  const [error, setError] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const { language } = useLanguage();
+  const txt = t[language];
 
   const handleChange = (e) => {
-    setEmail(e.target.value)
+    setEmail(e.target.value);
     // Clear error when user starts typing
     if (error) {
-      setError('')
+      setError("");
     }
-  }
+  };
 
   const validateEmail = () => {
     if (!email.trim()) {
-      setError('Email is required')
-      return false
+      setError(txt.emailRequired);
+      return false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      setError('Email is invalid')
-      return false
+      setError(txt.emailInvalid);
+      return false;
     }
-    return true
-  }
+    return true;
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     if (!validateEmail()) {
-      return
+      return;
     }
-    
-    setIsLoading(true)
-    
+
+    setIsLoading(true);
+
     // Simulate API call
     setTimeout(() => {
-      setIsLoading(false)
-      setIsSubmitted(true)
-    }, 1500)
-  }
+      setIsLoading(false);
+      setIsSubmitted(true);
+    }, 1500);
+  };
 
   if (isSubmitted) {
     return (
@@ -53,52 +58,49 @@ const ForgotPassword = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-            <div className="success-icon">
-              <svg
-                width="64"
-                height="64"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+          <div className="success-icon">
+            <svg
+              width="64"
+              height="64"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <div className="success-header">
+            <h1>{txt.checkEmail}</h1>
+            <p>{txt.resetLinkSent}</p>
+            <p className="email-display">{email}</p>
+          </div>
+          <div className="success-message">
+            <p>{txt.resetInstructions}</p>
+          </div>
+          <div className="success-footer">
+            <p>
+              {txt.didntReceiveEmail}{" "}
+              <button
+                onClick={() => {
+                  setIsSubmitted(false);
+                  setEmail("");
+                }}
+                className="resend-link"
               >
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-              </svg>
-            </div>
-            <div className="success-header">
-              <h1>Check Your Email</h1>
-              <p>We've sent a password reset link to</p>
-              <p className="email-display">{email}</p>
-            </div>
-            <div className="success-message">
-              <p>
-                Please check your email inbox and click on the reset link to create a new password.
-                If you don't see the email, check your spam folder.
-              </p>
-            </div>
-            <div className="success-footer">
-              <p>
-                Didn't receive the email?{' '}
-                <button
-                  onClick={() => {
-                    setIsSubmitted(false)
-                    setEmail('')
-                  }}
-                  className="resend-link"
-                >
-                  Resend
-                </button>
-              </p>
-              <Link to="/login" className="back-to-login">
-                Back to Sign In
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-    )
+                {txt.resend}
+              </button>
+            </p>
+            <Link to="/login" className="back-to-login">
+              {txt.backToSignIn}
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    );
   }
 
   return (
@@ -110,42 +112,41 @@ const ForgotPassword = () => {
         transition={{ duration: 0.5 }}
       >
         <div className="forgot-password-header">
-          <h1>Forgot Password?</h1>
-          <p>No worries! Enter your email address and we'll send you a link to reset your password.</p>
+          <h1>{txt.forgotPassword}</h1>
+          <p>{txt.forgotPasswordSubtitle}</p>
         </div>
 
         <form className="forgot-password-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">{txt.emailAddress}</label>
             <input
               type="email"
               id="email"
               name="email"
               value={email}
               onChange={handleChange}
-              className={error ? 'error' : ''}
-              placeholder="Enter your email"
+              className={error ? "error" : ""}
+              placeholder={txt.emailPlaceholder}
             />
             {error && <span className="error-message">{error}</span>}
           </div>
 
           <button type="submit" className="submit-button" disabled={isLoading}>
-            {isLoading ? 'Sending...' : 'Send Reset Link'}
+            {isLoading ? txt.sending : txt.sendResetLink}
           </button>
         </form>
 
         <div className="forgot-password-footer">
           <p>
-            Remember your password?{' '}
+            {txt.rememberPassword}{" "}
             <Link to="/login" className="link-text">
-              Sign in here
+              {txt.signInHere}
             </Link>
           </p>
         </div>
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
-export default ForgotPassword
-
+export default ForgotPassword;

@@ -4,10 +4,14 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--bg-primary) 0%,
+    var(--bg-secondary) 100%
+  );
 }
 
-.register-container {
+/* .register-container {
   background: var(--card-bg);
   border-radius: 20px;
   padding: 3rem;
@@ -16,9 +20,18 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--border-color);
   transition: all 0.3s ease;
-}
+} */
 
-.register-header {
+.register-container {
+  background: var(--card-bg);
+  border-radius: 18px;
+  padding: 2rem 2.2rem;
+  width: 100%;
+  max-width: 650px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color);
+}
+/* .register-header {
   text-align: center;
   margin-bottom: 2.5rem;
 }
@@ -28,8 +41,17 @@
   color: var(--primary-green);
   margin-bottom: 0.5rem;
   font-weight: 700;
+} */
+
+.register-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
+.register-header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.3rem;
+}
 .register-header p {
   color: var(--text-dark);
   opacity: 0.8;
@@ -39,7 +61,13 @@
 .register-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .form-group {
@@ -55,7 +83,7 @@
 }
 
 .form-group input {
-  padding: 0.875rem 1.25rem;
+  /* padding: 0.875rem 1.25rem; */
   border: 2px solid var(--border-color);
   border-radius: 12px;
   background: var(--bg-secondary);
@@ -63,6 +91,8 @@
   font-size: 1rem;
   transition: all 0.3s ease;
   font-family: inherit;
+  padding: 0.75rem 1rem;
+  height: 40px;
 }
 
 .form-group input:focus {
@@ -124,7 +154,11 @@
 
 .submit-button {
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, var(--primary-green), var(--soothing-turquoise));
+  background: linear-gradient(
+    135deg,
+    var(--primary-green),
+    var(--soothing-turquoise)
+  );
   color: var(--text-light);
   border: none;
   border-radius: 12px;
@@ -223,4 +257,3 @@
     font-size: 0.85rem;
   }
 }
-
