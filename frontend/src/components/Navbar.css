@@ -1,52 +1,44 @@
 .navbar {
   background-color: var(--card-bg);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   position: sticky;
   top: 0;
   z-index: 1000;
-
-  /* ↓ Reduced height */
   padding: 0.6rem 0;
-
   border-bottom: 2px solid var(--border-color);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .navbar-container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
-
-  /* ↓ Reduced horizontal padding */
-  padding: 0 1.5rem;
-
+  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
 }
 
-/* --- Logo and Text --- */
+/* --- Logo --- */
 .navbar-logo {
   display: flex;
   align-items: center;
   text-decoration: none;
   color: var(--primary-green);
   font-weight: bold;
-
-  /* ↓ Micro-interaction */
+  flex-shrink: 0;
   transition: transform 0.25s ease;
 }
-
 .navbar-logo:hover {
   transform: scale(1.03);
 }
 
 .logo-image {
-  /* ↓ reduced size for shorter navbar */
   height: 55px;
-  width: 77px;
-
-  margin-right: 8px;
+  width: 55px;
+  margin-right: 10px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -54,38 +46,43 @@
 .logo-text-container {
   display: flex;
   flex-direction: column;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .logo-text {
-  font-size: 1.45rem; /* from 1.8rem */
+  font-size: 1.5rem;
   color: var(--primary-green);
+  white-space: nowrap;
 }
 
 .logo-subtitle {
-  font-size: 0.7rem; /* slightly smaller */
+  font-size: 0.72rem;
   color: var(--text-dark);
   opacity: 0.8;
+  white-space: nowrap;
 }
 
 /* --- Menu Links --- */
 .navbar-menu {
   display: flex;
   list-style: none;
-  gap: 1.5rem; /* slightly tighter */
+  gap: 0.8rem;
   align-items: center;
   flex: 1;
   justify-content: center;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar-link {
   text-decoration: none;
   color: var(--text-dark);
   font-weight: 500;
-
-  padding: 0.4rem 0.8rem; /* reduced */
-  border-radius: 7px;
+  font-size: 0.95rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
   transition: all 0.25s ease;
+  white-space: nowrap;
 }
 
 .navbar-link:hover {
@@ -96,6 +93,46 @@
 .navbar-link.active {
   color: var(--primary-green);
   background-color: var(--warm-sand);
+  font-weight: 600;
+}
+
+/* AyuStore special link */
+.navbar-link.ayustore {
+  background: linear-gradient(135deg, #2d6a4f, #40916c);
+  color: #fff !important;
+  font-weight: 600;
+  padding: 0.45rem 1.1rem;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(45, 106, 79, 0.25);
+  transition: all 0.25s ease;
+}
+.navbar-link.ayustore:hover {
+  background: linear-gradient(135deg, #1b4332, #2d6a4f);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(45, 106, 79, 0.35);
+}
+.navbar-link.ayustore.active {
+  background: linear-gradient(135deg, #1b4332, #2d6a4f);
+  color: #fff !important;
+}
+
+/* --- Language Selector --- */
+.lang-select {
+  padding: 7px 12px;
+  border-radius: 20px;
+  border: 1.5px solid #d0e8d8;
+  background: #f8fdf9;
+  color: #2d6a4f;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+.lang-select:hover {
+  border-color: #40916c;
+  box-shadow: 0 0 0 3px rgba(64, 145, 108, 0.1);
 }
 
 /* --- Controls --- */
@@ -104,10 +141,9 @@
   gap: 0.8rem;
   align-items: center;
   position: relative;
+  flex-shrink: 0;
 }
 
-/* ------------------------ */
-/* UPDATED: username visible beside profile icon */
 .profile-name {
   font-size: 0.85rem;
   font-weight: 600;
@@ -115,27 +151,22 @@
   margin-left: 4px;
   white-space: nowrap;
 }
-/* ------------------------ */
 
 .theme-toggle,
 .profile-icon {
   background: var(--bg-secondary);
   border: 2px solid var(--border-color);
   border-radius: 50%;
-
-  /* ↓ smaller buttons */
-  width: 34px;
-  height: 34px;
-
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-
   font-size: 1rem;
   color: var(--text-dark);
-
   transition: all 0.25s ease;
+  flex-shrink: 0;
 }
 
 .theme-toggle:hover,
@@ -154,22 +185,19 @@
 .profile-dropdown {
   position: absolute;
   top: calc(100% + 8px);
-
+  right: 0;
   background: var(--card-bg);
   border: 2px solid var(--border-color);
   border-radius: 12px;
-
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  min-width: 170px;
+  min-width: 175px;
   z-index: 1001;
   overflow: hidden;
-
-  /* UPDATED: subtle animation */
   animation: dropdownFade 0.18s ease-out;
 }
 
 .dropdown-header {
-  padding: 0.8rem; /* slightly smaller */
+  padding: 0.85rem;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
 }
@@ -183,7 +211,6 @@
 .user-avatar {
   width: 38px;
   height: 38px;
-
   border-radius: 50%;
   background: linear-gradient(
     135deg,
@@ -204,14 +231,12 @@
   color: var(--text-dark);
   font-size: 0.9rem;
 }
-
 .user-email {
   font-size: 0.75rem;
   color: var(--text-dark);
   opacity: 0.7;
   margin-top: 0.15rem;
 }
-
 .dropdown-divider {
   height: 1px;
   background: var(--border-color);
@@ -222,28 +247,22 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-
   padding: 0.75rem 0.9rem;
   font-size: 0.9rem;
-
   color: var(--text-dark);
   cursor: pointer;
   transition: all 0.2s ease;
+  text-decoration: none;
 }
-
 .dropdown-item:hover {
   background: var(--bg-secondary);
   color: var(--primary-green);
 }
-
-/* ------------------------ */
-/* UPDATED: centered logout */
 .dropdown-item.logout {
   color: #e74c3c;
   justify-content: center;
   text-align: center;
 }
-/* ------------------------ */
 
 @keyframes dropdownFade {
   from {
@@ -256,18 +275,36 @@
   }
 }
 
-/* --- Responsive adjustments --- */
+/* --- Responsive --- */
+@media (max-width: 1100px) {
+  .navbar-menu {
+    gap: 0.5rem;
+  }
+  .navbar-link {
+    font-size: 0.88rem;
+    padding: 0.4rem 0.7rem;
+  }
+  .logo-text {
+    font-size: 1.3rem;
+  }
+  .logo-subtitle {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .logo-image {
-    height: 38px;
-    width: 38px;
+    height: 40px;
+    width: 40px;
   }
-
   .logo-text {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
-
   .navbar-menu {
-    gap: 5 rem;
+    gap: 0.3rem;
+  }
+  .navbar-link {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.5rem;
   }
 }

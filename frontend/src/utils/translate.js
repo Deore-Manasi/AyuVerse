@@ -368,6 +368,60 @@ export const t = {
     healthBenefits: "Health Benefits",
 
     close: "Close",
+
+    //Store Locator
+    storeLocator: "AyuStore",
+    storeTitle: "Find Stores Selling Your Plant",
+    storeSubtitle:
+      "Search any Ayurvedic plant and find nearby stores that sell it",
+
+    searchStores: "Search Stores",
+
+    detectingLocation: "Detecting your location...",
+    locationDetected: "Location detected:",
+    locationNotDetected: "Location not detected.",
+    redetect: "Re-detect",
+    tryAgain: "Try Again",
+
+    plantHerbName: "Plant / Herb Name",
+    plantPlaceholder: "Type or select a plant e.g. Ashwagandha...",
+
+    yourLocation: "Your Location",
+    locationPlaceholder: "e.g. Pune, Mumbai, Delhi...",
+
+    locationRequired: "Please enter or detect your location first.",
+    plantRequired: "Please enter or select a plant name.",
+    locationDetectionFailed:
+      "Could not detect location. Please type your city manually.",
+    geoNotSupported: "Geolocation not supported by your browser.",
+
+    findStores: "Find Stores",
+    reset: "Reset",
+
+    googleMapsPowered: "Results powered by Google Maps",
+    openGoogleMaps: "Open in Google Maps",
+
+    allStores: "All Stores",
+    allStoresDesc: "Full list on Google Maps",
+
+    ayurvedicDoctors: "Ayurvedic Doctors",
+    nearbyPractitioners: "Nearby practitioners",
+
+    ayurvedicClinics: "Ayurvedic Clinics",
+    treatmentCenters: "Treatment centers nearby",
+
+    popularPlants: "Popular Plants",
+
+    autoLocation: "Auto Location",
+    autoLocationDesc:
+      "GPS detects your city automatically to find the nearest stores",
+
+    plantSearch: "Plant Search",
+    plantSearchDesc:
+      "Search from your plant database or type any herb name manually",
+
+    liveMap: "Live Map",
+    liveMapDesc: "Real-time store locations with directions via Google Maps",
   },
 
   Hindi: {
@@ -558,6 +612,61 @@ export const t = {
     healthBenefits: "स्वास्थ्य लाभ",
 
     close: "बंद करें",
+
+    //Store Locator
+    storeLocator: "आयुस्टोर",
+
+    storeTitle: "अपने पौधे बेचने वाले स्टोर खोजें",
+    storeSubtitle:
+      "किसी भी आयुर्वेदिक पौधे को खोजें और उसे बेचने वाले नज़दीकी स्टोर ढूंढें",
+
+    searchStores: "स्टोर खोजें",
+
+    detectingLocation: "आपका स्थान पता लगाया जा रहा है...",
+    locationDetected: "स्थान पता चला:",
+    locationNotDetected: "स्थान पता नहीं चल सका।",
+    redetect: "फिर से पता लगाएँ",
+    tryAgain: "पुनः प्रयास करें",
+
+    plantHerbName: "पौधा / जड़ी-बूटी का नाम",
+    plantPlaceholder: "पौधे का नाम लिखें या चुनें, जैसे अश्वगंधा...",
+
+    yourLocation: "आपका स्थान",
+    locationPlaceholder: "जैसे पुणे, मुंबई, दिल्ली...",
+
+    locationRequired: "कृपया पहले अपना स्थान दर्ज करें या पता लगाएँ।",
+    plantRequired: "कृपया पौधे का नाम दर्ज करें या चुनें।",
+    locationDetectionFailed:
+      "स्थान का पता नहीं चल सका। कृपया अपना शहर मैन्युअली दर्ज करें।",
+    geoNotSupported: "आपका ब्राउज़र जियोलोकेशन का समर्थन नहीं करता।",
+
+    findStores: "स्टोर खोजें",
+    reset: "रीसेट करें",
+
+    googleMapsPowered: "परिणाम Google Maps द्वारा प्रदर्शित किए गए हैं",
+    openGoogleMaps: "Google Maps में खोलें",
+
+    allStores: "सभी स्टोर",
+    allStoresDesc: "Google Maps पर पूरी सूची देखें",
+
+    ayurvedicDoctors: "आयुर्वेदिक डॉक्टर",
+    nearbyPractitioners: "नज़दीकी चिकित्सक",
+
+    ayurvedicClinics: "आयुर्वेदिक क्लिनिक",
+    treatmentCenters: "नज़दीकी उपचार केंद्र",
+
+    popularPlants: "लोकप्रिय पौधे",
+
+    autoLocation: "स्वचालित स्थान",
+    autoLocationDesc: "GPS आपके शहर का स्वतः पता लगाकर निकटतम स्टोर खोजता है",
+
+    plantSearch: "पौधा खोज",
+    plantSearchDesc:
+      "अपने पौधों के डेटाबेस से खोजें या किसी भी जड़ी-बूटी का नाम मैन्युअली दर्ज करें",
+
+    liveMap: "लाइव मैप",
+    liveMapDesc:
+      "Google Maps के माध्यम से वास्तविक समय में स्टोर स्थान और दिशा-निर्देश देखें",
   },
 
   Marathi: {
@@ -747,5 +856,59 @@ export const t = {
     healthBenefits: "आरोग्य फायदे",
 
     close: "बंद करा",
+
+    //Store Locator
+    storeLocator: "आयुस्टोर",
+
+    storeTitle: "तुमच्या वनस्पती विकणारी स्टोअर्स शोधा",
+    storeSubtitle:
+      "कोणतीही आयुर्वेदिक वनस्पती शोधा आणि ती विकणारी जवळची स्टोअर्स शोधा",
+
+    searchStores: "स्टोअर्स शोधा",
+
+    detectingLocation: "तुमचे स्थान शोधले जात आहे...",
+    locationDetected: "स्थान सापडले:",
+    locationNotDetected: "स्थान सापडले नाही.",
+    redetect: "पुन्हा शोधा",
+    tryAgain: "पुन्हा प्रयत्न करा",
+
+    plantHerbName: "वनस्पती / औषधी वनस्पतीचे नाव",
+    plantPlaceholder: "उदा. अश्वगंधा... वनस्पतीचे नाव लिहा किंवा निवडा",
+
+    yourLocation: "तुमचे स्थान",
+    locationPlaceholder: "उदा. पुणे, मुंबई, दिल्ली...",
+
+    locationRequired: "कृपया प्रथम तुमचे स्थान प्रविष्ट करा किंवा शोधा.",
+    plantRequired: "कृपया वनस्पतीचे नाव प्रविष्ट करा किंवा निवडा.",
+    locationDetectionFailed:
+      "स्थान शोधता आले नाही. कृपया तुमचे शहर स्वतः प्रविष्ट करा.",
+    geoNotSupported: "तुमचा ब्राउझर जिओलोकेशनला समर्थन देत नाही.",
+
+    findStores: "स्टोअर्स शोधा",
+    reset: "रीसेट करा",
+
+    googleMapsPowered: "निकाल Google Maps द्वारे प्रदर्शित केले आहेत",
+    openGoogleMaps: "Google Maps मध्ये उघडा",
+
+    allStores: "सर्व स्टोअर्स",
+    allStoresDesc: "Google Maps वरील संपूर्ण यादी",
+
+    ayurvedicDoctors: "आयुर्वेदिक डॉक्टर",
+    nearbyPractitioners: "जवळील वैद्य",
+
+    ayurvedicClinics: "आयुर्वेदिक क्लिनिक्स",
+    treatmentCenters: "जवळील उपचार केंद्रे",
+
+    popularPlants: "लोकप्रिय वनस्पती",
+
+    autoLocation: "स्वयंचलित स्थान",
+    autoLocationDesc: "GPS तुमचे शहर आपोआप शोधून जवळील स्टोअर्स दाखवतो",
+
+    plantSearch: "वनस्पती शोध",
+    plantSearchDesc:
+      "तुमच्या वनस्पती डेटाबेसमधून शोधा किंवा कोणत्याही औषधी वनस्पतीचे नाव स्वतः टाइप करा",
+
+    liveMap: "लाइव्ह नकाशा",
+    liveMapDesc: "Google Maps द्वारे रिअल-टाइम स्टोअर स्थान आणि दिशा पहा",
   },
 };
