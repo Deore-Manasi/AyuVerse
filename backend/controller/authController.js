@@ -5,6 +5,7 @@ const generateToken = require("../utils/generateToken");
 const { protect } = require("../middleware/authMiddleware");
 const crypto = require("crypto");
 const rateLimit = require("express-rate-limit");
+const sendEmail = require("../utils/sendEmail");
 
 // Rate limiter — max 10 attempts per 15 minutes per IP
 const authLimiter = rateLimit({
@@ -137,10 +138,31 @@ router.post("/forgot-password", authLimiter, async (req, res) => {
 
     // TODO: Send email with this link using Nodemailer/SendGrid
     const resetLink = `${process.env.FRONTEND_URL}/reset-password/${rawToken}`;
-    console.log("Reset link (dev only):", resetLink); // remove in production
+
+    await sendEmail({
+      to: user.email,
+      subject: "AyuVerse — Reset Your Password",
+      html: `
+    <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; padding: 30px; border: 1px solid #e0e0e0; border-radius: 10px;">
+      <h2 style="color: #2d6a4f;">Reset Your Password</h2>
+      <p>Hello <strong>${user.username}</strong>,</p>
+      <p>We received a request to reset your AyuVerse password. Click the button below to set a new password:</p>
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${resetLink}" 
+           style="background-color: #2d6a4f; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px;">
+          Reset Password
+        </a>
+      </div>
+      <p style="color: #888; font-size: 13px;">This link expires in <strong>15 minutes</strong>. If you didn't request this, ignore this email.</p>
+      <hr style="border: none; border-top: 1px solid #eee;" />
+      <p style="color: #aaa; font-size: 12px; text-align: center;">© 2025 AyuVerse — The Universe of Ayurveda</p>
+    </div>
+  `,
+    });
 
     res.json({ message: "If that email exists, a reset link has been sent." });
   } catch (err) {
+    console.log(err); // ✅ add this line
     res.status(500).json({ message: "Server error.", error: err.message });
   }
 });

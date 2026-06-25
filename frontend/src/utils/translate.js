@@ -321,7 +321,7 @@ export const t = {
     checkEmail: "Check Your Email",
     resetLinkSent: "We've sent a password reset link to",
     resetInstructions:
-      "Please check your email inbox and click on the reset link to create a new password. If you don't see the email, check your spam folder.",
+      "Please check your email inbox and Spam folder , click on the reset link to create a new password. If you don't see the email, check your spam folder.",
 
     didntReceiveEmail: "Didn't receive the email?",
     resend: "Resend",
