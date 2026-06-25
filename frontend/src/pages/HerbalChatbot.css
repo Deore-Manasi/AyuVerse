@@ -9,9 +9,7 @@
   width: 270px;
   height: 100%;
   background: #1f6f43;
-
   padding: 20px;
-
   display: flex;
   flex-direction: column;
   color: white;
@@ -51,10 +49,18 @@
   cursor: pointer;
   font-size: 0.9rem;
   transition: 0.2s;
+  color: white; /* ✅ ensure text is visible on green bg */
 }
 
 .chat-history-item:hover {
   background: rgba(255, 255, 255, 0.55);
+  color: #1f6f43; /* ✅ dark on hover */
+}
+
+.chat-history-item.active {
+  background: rgba(255, 255, 255, 0.75);
+  color: #1f6f43; /* ✅ highlight active chat */
+  font-weight: 600;
 }
 
 /* MAIN CHAT AREA */
@@ -154,7 +160,6 @@
 
 .message-content {
   max-width: 70%;
-
   padding: 12px 15px;
   border-radius: 15px;
   font-weight: 500;
@@ -176,6 +181,60 @@
   font-size: 0.7rem;
   margin-top: 5px;
   opacity: 0.6;
+}
+
+/* ✅ BOT MARKDOWN FORMATTING */
+.bot-markdown p {
+  margin: 0 0 8px 0;
+}
+
+.bot-markdown p:last-child {
+  margin-bottom: 0;
+}
+
+.bot-markdown ul,
+.bot-markdown ol {
+  padding-left: 1.2rem;
+  margin: 6px 0;
+}
+
+.bot-markdown li {
+  margin-bottom: 4px;
+  line-height: 1.6;
+}
+
+.bot-markdown strong {
+  font-weight: 700;
+  color: #0f5132;
+}
+
+.bot-markdown em {
+  font-style: italic;
+}
+
+.bot-markdown h1,
+.bot-markdown h2,
+.bot-markdown h3 {
+  color: #0f5132;
+  margin: 10px 0 6px 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.bot-markdown code {
+  background: #d4edda;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #0f5132;
+}
+
+.bot-markdown blockquote {
+  border-left: 3px solid #198754;
+  margin: 8px 0;
+  padding-left: 12px;
+  color: #145c32;
+  font-style: italic;
 }
 
 /* INPUT */

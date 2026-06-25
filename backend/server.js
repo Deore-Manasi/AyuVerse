@@ -187,6 +187,9 @@ const Listing = require("./models/listing");
 const authRoutes = require("./controller/authController");
 app.use("/api/auth", authRoutes);
 
+const chatRoutes = require("./controller/chatController");
+app.use("/api/chats", chatRoutes);
+
 // Existing routes below — untouched
 app.get("/", (req, res) => {
   res.send("AyuVerse Backend Server is Running");
