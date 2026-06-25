@@ -64,6 +64,10 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/explore-plants" element={<ExplorePlants />} />
+              <Route
+                path="/reset-password/:token"
+                element={<ResetPassword />}
+              />
 
               {/* ── Protected Routes ── */}
               <Route
@@ -129,11 +133,6 @@ function App() {
                     <StoreLocator />
                   </ProtectedRoute>
                 }
-              />
-
-              <Route
-                path="/reset-password/:token"
-                element={<ResetPassword />}
               />
 
               <Route
