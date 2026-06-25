@@ -60,24 +60,82 @@ function App() {
             <Routes>
               {/* ── Public Routes ── */}
               <Route path="/" element={<Homepage />} />
-              <Route path="/explore-plants" element={<ExplorePlants />} />
-              <Route path="/plant/:name" element={<PlantDetail />} />
-              <Route path="/herbal-chatbot" element={<HerbalChatbot />} />
-              <Route path="/3d-visualizer" element={<Visualizer3D />} />
-              <Route path="/virtual-tour" element={<VirtualTour />} />
-              <Route path="/vata" element={<VataZone />} />
-              <Route path="/pitta" element={<PittaZone />} />
-              <Route path="/kapha" element={<KaphaZone />} />
-              <Route path="/store-locator" element={<StoreLocator />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/explore-plants" element={<ExplorePlants />} />
+
+              {/* ── Protected Routes ── */}
+              <Route
+                path="/plant/:name"
+                element={
+                  <ProtectedRoute>
+                    <PlantDetail />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/herbal-chatbot"
+                element={
+                  <ProtectedRoute>
+                    <HerbalChatbot />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/3d-visualizer"
+                element={
+                  <ProtectedRoute>
+                    <Visualizer3D />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/virtual-tour"
+                element={
+                  <ProtectedRoute>
+                    <VirtualTour />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/vata"
+                element={
+                  <ProtectedRoute>
+                    <VataZone />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/pitta"
+                element={
+                  <ProtectedRoute>
+                    <PittaZone />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/kapha"
+                element={
+                  <ProtectedRoute>
+                    <KaphaZone />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/store-locator"
+                element={
+                  <ProtectedRoute>
+                    <StoreLocator />
+                  </ProtectedRoute>
+                }
+              />
+
               <Route
                 path="/reset-password/:token"
                 element={<ResetPassword />}
               />
 
-              {/* ── Protected Routes ── */}
               <Route
                 path="/diet-chart"
                 element={
