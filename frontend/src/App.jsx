@@ -27,7 +27,7 @@ function App() {
   const fetchAPI = async () => {
     try {
       const response = await axios.get("http://localhost:8080/");
-      console.log(response);
+      //console.log(response);
     } catch (error) {
       console.error("Error fetching data from backend:", error);
     }

@@ -954,6 +954,257 @@
 //
 // ================== PLANT DETAIL PAGE ==================
 
+// import { useCallback, useEffect, useRef, useState } from "react";
+// import { useParams, useNavigate, Link } from "react-router-dom";
+// import { AnimatePresence } from "framer-motion";
+// import { useLanguage } from "../context/LanguageContext";
+// import { t } from "../utils/translate";
+// import "./NPlantDetail.css";
+// import Plant3DViewer from "../components/Plant3DViewer";
+
+// const PlantDetail = () => {
+//   const { name } = useParams();
+//   const navigate = useNavigate();
+
+//   const { language } = useLanguage();
+//   const txt = t[language];
+
+//   const [plant, setPlant] = useState(null);
+//   const [activeTab, setActiveTab] = useState("3d");
+//   const [showAyushModal, setShowAyushModal] = useState(false);
+//   const [showHealthModal, setShowHealthModal] = useState(false);
+//   const [isSpeaking, setIsSpeaking] = useState(false);
+
+//   const speechSynthesisRef = useRef(null);
+
+//   // ================= FETCH =================
+//   useEffect(() => {
+//     const fetchPlant = async () => {
+//       try {
+//         const res = await fetch(
+//           `http://localhost:8080/listings/${encodeURIComponent(name)}`,
+//         );
+//         const data = await res.json();
+//         setPlant(data);
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     };
+//     fetchPlant();
+//   }, [name]);
+
+//   // ================= SPEECH =================
+//   const stopSpeaking = useCallback(() => {
+//     if (speechSynthesisRef.current) {
+//       speechSynthesisRef.current.cancel();
+//     }
+//     setIsSpeaking(false);
+//   }, []);
+
+//   const handleSpeakToggle = () => {
+//     if (!plant?.voiceDesc) return;
+
+//     if (isSpeaking) {
+//       stopSpeaking();
+//       return;
+//     }
+
+//     const synth = window.speechSynthesis;
+//     speechSynthesisRef.current = synth;
+
+//     const utterance = new SpeechSynthesisUtterance(plant.voiceDesc);
+//     utterance.lang = "en-US";
+//     utterance.rate = 0.95;
+
+//     synth.cancel();
+//     synth.speak(utterance);
+//     setIsSpeaking(true);
+
+//     utterance.onend = () => setIsSpeaking(false);
+//   };
+
+//   if (!plant) {
+//     return (
+//       <div className="plant-detail">
+//         <h6>{txt.loading}</h6>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="plant-detail">
+//       {/* HEADER */}
+//       <div className="plant-detail-header">
+//         <Link to="/" className="header-home-link">
+//           {txt.backToHome}
+//         </Link>
+
+//         <button
+//           className="header-back-button"
+//           onClick={() => navigate("/explore-plants")}
+//         >
+//           {txt.goBack}
+//         </button>
+//       </div>
+
+//       {/* MAIN CONTENT */}
+//       <div className="plant-detail-content">
+//         {/* LEFT COLUMN */}
+//         <div className="plant-info-column">
+//           {[
+//             [txt.plantSize, plant.plantSize],
+//             [txt.nativeRegion, plant.nativeRegion],
+//             [txt.preferredClimate, plant.preferredClimate],
+//             [txt.requiredSunlight, plant.reqSunlight],
+//             [txt.requiredSoil, plant.reqSoil],
+//           ].map(([label, value], i) => (
+//             <div className="info-card" key={i}>
+//               <div className="info-card-text">
+//                 <strong>{label} : </strong>
+//                 {value}
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+
+//         {/* CENTER COLUMN */}
+//         <div className="plant-view-column">
+//           <div className="plant-image-container">
+//             {activeTab === "3d" && plant.glb3D ? (
+//               <Plant3DViewer modelUrl={plant.glb3D} />
+//             ) : (
+//               <Plant3DViewer modelUrl={plant.glb3D} />
+//             )}
+
+//             {/* VOICE BUTTON OVER IMAGE */}
+//             <div className="viewer-controls">
+//               <button
+//                 className={`viewer-speak-button ${
+//                   isSpeaking ? "speaking" : ""
+//                 }`}
+//                 onClick={handleSpeakToggle}
+//               >
+//                 🔊
+//               </button>
+//             </div>
+//           </div>
+
+//           <div className="plant-label">{plant.plantName}</div>
+
+//           <div className="plant-tabs">
+//             <button
+//               className={`plant-tab ${activeTab === "3d" ? "active" : ""}`}
+//               onClick={() => setActiveTab("3d")}
+//             >
+//               {txt.view3D}
+//             </button>
+
+//             <button
+//               className="plant-tab"
+//               onClick={() => setShowAyushModal(true)}
+//             >
+//               {txt.holisticUses}
+//             </button>
+
+//             <button
+//               className="plant-tab"
+//               onClick={() => setShowHealthModal(true)}
+//             >
+//               {txt.benefits}
+//             </button>
+//           </div>
+//         </div>
+
+//         {/* RIGHT COLUMN */}
+//         <div className="medicinal-info-column">
+//           {[
+//             [txt.partUsed, plant.partMedicine],
+//             [txt.activeCompounds, plant.activeCompounds],
+//             [txt.therapeuticProperties, plant.therapeuticProp],
+//             [txt.dosageForm, plant.dosageForm],
+//           ].map(([label, value], i) => (
+//             <div className="info-card" key={i}>
+//               <div className="info-card-text">
+//                 <strong>{label} : </strong>
+//                 {value}
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+
+//       {/* AYUSH MODAL */}
+//       <AnimatePresence>
+//         {showAyushModal && (
+//           <div className="modal-overlay">
+//             <div className="modal-content ayush-modal">
+//               <div className="modal-header">
+//                 <div className="modal-title">
+//                   <h2>{txt.ayushApplications}</h2>
+//                 </div>
+//               </div>
+
+//               <div className="modal-body">
+//                 {["ayurveda", "unani", "siddha"].map((type) => (
+//                   <div className="ayush-section" key={type}>
+//                     <div className="ayush-content">
+//                       <h3>{type.toUpperCase()}</h3>
+//                       <p>{plant.ayushApp?.[type]}</p>
+//                     </div>
+//                   </div>
+//                 ))}
+//               </div>
+
+//               <div className="modal-footer">
+//                 <button
+//                   className="modal-close-button"
+//                   onClick={() => setShowAyushModal(false)}
+//                 >
+//                   {txt.close}
+//                 </button>
+//               </div>
+//             </div>
+//           </div>
+//         )}
+//       </AnimatePresence>
+
+//       {/* HEALTH MODAL */}
+//       <AnimatePresence>
+//         {showHealthModal && (
+//           <div className="modal-overlay">
+//             <div className="modal-content health-modal">
+//               <div className="modal-header">
+//                 <div className="modal-title">
+//                   <h2>{txt.healthBenefits}</h2>
+//                 </div>
+//               </div>
+
+//               <div className="modal-body">
+//                 {["a", "b", "c", "d"].map((item) => (
+//                   <div className="health-benefit-item" key={item}>
+//                     <p>{plant.benefits?.[item]}</p>
+//                   </div>
+//                 ))}
+//               </div>
+
+//               <div className="modal-footer">
+//                 <button
+//                   className="modal-close-button"
+//                   onClick={() => setShowHealthModal(false)}
+//                 >
+//                   Close
+//                 </button>
+//               </div>
+//             </div>
+//           </div>
+//         )}
+//       </AnimatePresence>
+//     </div>
+//   );
+// };
+
+// export default PlantDetail;
+
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -974,25 +1225,60 @@ const PlantDetail = () => {
   const [showAyushModal, setShowAyushModal] = useState(false);
   const [showHealthModal, setShowHealthModal] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [fetchError, setFetchError] = useState(false); // ← NEW
+  const [modelError, setModelError] = useState(false); // ← NEW
+  const [isOnline, setIsOnline] = useState(navigator.onLine); // ← NEW
 
   const speechSynthesisRef = useRef(null);
+
+  // ================= ONLINE/OFFLINE DETECTION (NEW) =================
+  useEffect(() => {
+    const goOnline = () => {
+      setIsOnline(true);
+      setModelError(false); // auto-retry model when back online
+    };
+    const goOffline = () => setIsOnline(false);
+
+    window.addEventListener("online", goOnline);
+    window.addEventListener("offline", goOffline);
+    return () => {
+      window.removeEventListener("online", goOnline);
+      window.removeEventListener("offline", goOffline);
+    };
+  }, []);
 
   // ================= FETCH =================
   useEffect(() => {
     const fetchPlant = async () => {
+      // ✅ Instantly show error if offline — no waiting
+      if (!navigator.onLine) {
+        setFetchError(true);
+        return;
+      }
+
       try {
+        setFetchError(false);
+
+        // ✅ 5 second timeout — no more infinite blank waiting
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 5000);
+
         const res = await fetch(
           `http://localhost:8080/listings/${encodeURIComponent(name)}`,
+          { signal: controller.signal },
         );
+        clearTimeout(timeout);
+
+        if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
         setPlant(data);
       } catch (err) {
         console.error(err);
+        setFetchError(true);
       }
     };
     fetchPlant();
   }, [name]);
-
   // ================= SPEECH =================
   const stopSpeaking = useCallback(() => {
     if (speechSynthesisRef.current) {
@@ -1023,14 +1309,89 @@ const PlantDetail = () => {
     utterance.onend = () => setIsSpeaking(false);
   };
 
-  if (!plant) {
+  // ================= ERROR STATE (NEW) =================
+  if (fetchError) {
     return (
-      <div className="plant-detail">
-        <h6>{txt.loading}</h6>
+      <div
+        className="plant-detail"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "70vh",
+          gap: "16px",
+        }}
+      >
+        <div style={{ fontSize: "56px" }}>🌿</div>
+        <h3 style={{ margin: 0, fontSize: "20px" }}>Plant data unavailable</h3>
+        <p
+          style={{
+            color: "#888",
+            textAlign: "center",
+            maxWidth: "300px",
+            fontSize: "14px",
+            lineHeight: 1.6,
+          }}
+        >
+          {isOnline
+            ? "Couldn't connect to the server. It may be temporarily down."
+            : "You're offline. Connect to the internet and try again."}
+        </p>
+        <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+          <button
+            onClick={() => {
+              setFetchError(false);
+              setPlant(null);
+            }}
+            style={{
+              padding: "10px 28px",
+              background: "#4a9e6b",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontSize: "14px",
+            }}
+          >
+            Retry
+          </button>
+        </div>
       </div>
     );
   }
 
+  // ================= LOADING STATE =================
+  if (!plant) {
+    return (
+      <div
+        className="plant-detail"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "70vh",
+          gap: "16px",
+        }}
+      >
+        <div
+          style={{
+            width: "44px",
+            height: "44px",
+            border: "3px solid rgba(74,158,107,0.2)",
+            borderTopColor: "#4a9e6b",
+            borderRadius: "50%",
+            animation: "spin 0.9s linear infinite",
+          }}
+        />
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+        <p style={{ color: "#888", fontSize: "14px", margin: 0 }}>
+          {txt.loading}
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="plant-detail">
       {/* HEADER */}
@@ -1070,18 +1431,76 @@ const PlantDetail = () => {
         {/* CENTER COLUMN */}
         <div className="plant-view-column">
           <div className="plant-image-container">
-            {activeTab === "3d" && plant.glb3D ? (
-              <Plant3DViewer modelUrl={plant.glb3D} />
+            {/* 3D VIEWER WITH FALLBACK (NEW) */}
+            {modelError || !plant.glb3D ? (
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "12px",
+                  background: "#1a1a2e",
+                  borderRadius: "12px",
+                }}
+              >
+                <div style={{ fontSize: "44px" }}>🌱</div>
+                <p
+                  style={{
+                    color: "#fff",
+                    fontSize: "15px",
+                    fontWeight: 500,
+                    margin: 0,
+                  }}
+                >
+                  3D model unavailable
+                </p>
+                <p
+                  style={{
+                    color: "#666",
+                    fontSize: "13px",
+                    margin: 0,
+                    textAlign: "center",
+                    padding: "0 20px",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {!isOnline
+                    ? "You're offline. Reconnect to view the 3D model."
+                    : !plant.glb3D
+                      ? "No 3D model available for this plant."
+                      : "Couldn't load the model from storage."}
+                </p>
+                {modelError && isOnline && (
+                  <button
+                    onClick={() => setModelError(false)}
+                    style={{
+                      padding: "7px 20px",
+                      background: "#4a9e6b",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "7px",
+                      cursor: "pointer",
+                      fontSize: "13px",
+                    }}
+                  >
+                    Retry
+                  </button>
+                )}
+              </div>
             ) : (
-              <Plant3DViewer modelUrl={plant.glb3D} />
+              <Plant3DViewer
+                modelUrl={plant.glb3D}
+                onError={() => setModelError(true)} // ← NEW prop
+              />
             )}
 
             {/* VOICE BUTTON OVER IMAGE */}
             <div className="viewer-controls">
               <button
-                className={`viewer-speak-button ${
-                  isSpeaking ? "speaking" : ""
-                }`}
+                className={`viewer-speak-button ${isSpeaking ? "speaking" : ""}`}
                 onClick={handleSpeakToggle}
               >
                 🔊
@@ -1143,7 +1562,6 @@ const PlantDetail = () => {
                   <h2>{txt.ayushApplications}</h2>
                 </div>
               </div>
-
               <div className="modal-body">
                 {["ayurveda", "unani", "siddha"].map((type) => (
                   <div className="ayush-section" key={type}>
@@ -1154,7 +1572,6 @@ const PlantDetail = () => {
                   </div>
                 ))}
               </div>
-
               <div className="modal-footer">
                 <button
                   className="modal-close-button"
@@ -1178,7 +1595,6 @@ const PlantDetail = () => {
                   <h2>{txt.healthBenefits}</h2>
                 </div>
               </div>
-
               <div className="modal-body">
                 {["a", "b", "c", "d"].map((item) => (
                   <div className="health-benefit-item" key={item}>
@@ -1186,7 +1602,6 @@ const PlantDetail = () => {
                   </div>
                 ))}
               </div>
-
               <div className="modal-footer">
                 <button
                   className="modal-close-button"
