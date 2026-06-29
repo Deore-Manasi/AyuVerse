@@ -150,6 +150,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
+const jwt = require("jsonwebtoken"); // already likely installed
+const { protect } = require("./middleware/authMiddleware");
+const User = require("./models/User");
 
 // ── Security Middleware ──────────────────────────────────
 app.use(helmet());
@@ -276,6 +279,44 @@ Return ONLY a valid JSON object (no markdown, no backticks) in this exact format
     res
       .status(500)
       .json({ success: false, message: "Failed to generate diet chart." });
+  }
+});
+
+// Replace your entire /api/diet/save route with this cleaner version:
+app.post("/api/diet/save", protect, async (req, res) => {
+  try {
+    //console.log("User from token:", req.user); // add this
+    const { formData, dietChart } = req.body;
+    console.log("Body received:", { formData, dietChart }); // add this
+    await User.findByIdAndUpdate(req.user._id, {
+      $push: { savedDietCharts: { ...formData, dietChart } },
+    });
+    res.json({ success: true, message: "Diet chart saved!" });
+  } catch (err) {
+    //console.error("SAVE ERROR:", err); // add this
+    res.status(500).json({ success: false, message: err.message }); // show real error
+  }
+});
+
+// Get saved diet charts for logged in user
+app.get("/api/diet/saved", protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select("savedDietCharts");
+    res.json({ success: true, charts: user.savedDietCharts.reverse() });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Failed to fetch." });
+  }
+});
+
+// Delete a saved diet chart
+app.delete("/api/diet/saved/:index", protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    user.savedDietCharts.splice(req.params.index, 1);
+    await user.save();
+    res.json({ success: true, message: "Deleted." });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Failed to delete." });
   }
 });
 

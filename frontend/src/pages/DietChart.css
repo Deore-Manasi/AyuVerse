@@ -454,6 +454,162 @@
   margin-right: 8px;
 }
 
+.save-btn {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.download-btn {
+  background: #1565c0;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.save-btn:hover {
+  background: #1b5e20;
+}
+.download-btn:hover {
+  background: #0d47a1;
+}
+
+/* ── SIDEBAR LAYOUT ── */
+.diet-chart-page {
+  display: flex;
+  min-height: 100vh;
+}
+
+.diet-sidebar {
+  width: 260px;
+  color: #ebf1ee;
+  background: linear-gradient(180deg, #14472e, #2d6a4f);
+
+  position: sticky;
+  top: 74px;
+
+  height: calc(100vh - 74px);
+  overflow-y: auto;
+
+  padding: 24px 16px;
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.diet-sidebar-header h2 {
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 0 0 12px 0;
+  letter-spacing: 0.5px;
+}
+
+.diet-sidebar-list {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 12px;
+}
+
+.sidebar-empty {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.diet-sidebar-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.diet-sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.diet-sidebar-item.sidebar-active {
+  background: rgba(255, 255, 255, 0.85);
+  color: #1a4731;
+}
+
+.sidebar-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar-dosha {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.sidebar-meta {
+  font-size: 0.75rem;
+  opacity: 0.75;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-date {
+  font-size: 0.7rem;
+  opacity: 0.55;
+}
+
+.sidebar-delete-btn {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-left: 8px;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: 0.2s;
+}
+
+.sidebar-delete-btn:hover {
+  opacity: 1;
+}
+
+.diet-main-content {
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .diet-chart-page {
+    flex-direction: column;
+  }
+  .diet-sidebar {
+    width: 100%;
+    min-height: unset;
+    max-height: 200px;
+    position: relative;
+  }
+}
+
 .season-tag {
   background: #fef3c7;
   color: #92400e;

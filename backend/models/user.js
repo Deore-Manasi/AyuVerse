@@ -32,6 +32,19 @@ const userSchema = new mongoose.Schema(
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
+
+    // Add this after the resetPasswordExpires field
+    savedDietCharts: [
+      {
+        dosha: String,
+        age: String,
+        weight: String,
+        healthGoal: String,
+        season: String,
+        dietChart: Object,
+        savedAt: { type: Date, default: Date.now },
+      },
+    ],
   },
   { timestamps: true },
 );
